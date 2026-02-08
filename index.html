@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan Bruno — Creative Director & Video Production Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #F7F5F2;
+    --color-bg-warm: #EFEAE4;
+    --color-bg-dark: #1A1A1A;
+    --color-text: #1A1A1A;
+    --color-text-secondary: #5A5650;
+    --color-text-light: #8A857E;
+    --color-text-on-dark: #F7F5F2;
+    --color-accent: #B8860B;
+    --color-accent-muted: #D4A843;
+    --color-border: #D6D0C8;
+    --color-card: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --max-width: 860px;
+    --section-padding: clamp(80px, 10vw, 140px);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--color-accent-muted);
+    color: var(--color-bg);
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(247, 245, 242, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--color-border);
+  }
+
+  nav .nav-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  nav .nav-links a:hover {
+    color: var(--color-text);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 40px 100px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--color-text);
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 580px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-line {
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+  }
+
+  .scroll-hint .arrow {
+    width: 1px;
+    height: 24px;
+    background: var(--color-text-light);
+    animation: pulse 2s ease infinite;
+  }
+
+  /* ============ SECTIONS ============ */
+  section {
+    padding: var(--section-padding) 40px;
+  }
+
+  .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin-bottom: 48px;
+  }
+
+  /* ============ STORY ============ */
+  .story-section {
+    background: var(--color-bg);
+  }
+
+  .story-section p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .story-section p:first-of-type::first-line {
+    color: var(--color-text);
+    font-weight: 400;
+  }
+
+  .story-section .story-heading {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-top: 64px;
+    margin-bottom: 28px;
+    padding-top: 48px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .story-section .framework {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 36px 40px;
+    margin: 40px 0;
+  }
+
+  .framework-title {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+  }
+
+  .framework-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .framework-item strong {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--color-text);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .framework-item span {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .story-section .pullquote {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--color-text);
+    border-left: 2px solid var(--color-accent);
+    padding-left: 28px;
+    margin: 48px 0;
+  }
+
+  /* ============ RECENT WORK ============ */
+  .work-section {
+    background: var(--color-bg-warm);
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .work-card {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 36px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .work-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  }
+
+  .work-card .card-role {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+
+  .work-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 12px;
+  }
+
+  .work-card p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .work-card .card-tags {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--color-text-light);
+  }
+
+  .work-card.locked {
+    position: relative;
+  }
+
+  .work-card.locked::after {
+    content: '🔒';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 0.9rem;
+  }
+
+  /* ============ APPLE SECTION ============ */
+  .apple-section {
+    background: var(--color-bg-dark);
+    color: var(--color-text-on-dark);
+  }
+
+  .apple-section .section-label {
+    color: var(--color-accent-muted);
+  }
+
+  .apple-section .section-title {
+    color: var(--color-text-on-dark);
+  }
+
+  .apple-stats {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 40px;
+  }
+
+  .apple-stat {
+    text-align: center;
+  }
+
+  .apple-stat .number {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    color: var(--color-accent-muted);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .apple-stat .label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(247, 245, 242, 0.5);
+  }
+
+  .apple-section p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(247, 245, 242, 0.7);
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border: 1px solid;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-light {
+    color: var(--color-text-on-dark);
+    border-color: rgba(247, 245, 242, 0.3);
+  }
+
+  .btn-light:hover {
+    background: var(--color-text-on-dark);
+    color: var(--color-bg-dark);
+  }
+
+  .btn-dark {
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+
+  .btn-dark:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  /* ============ FOUNDATION ============ */
+  .foundation-section {
+    background: var(--color-bg);
+  }
+
+  .foundation-section p.intro {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+
+  .credits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 48px;
+    margin-bottom: 48px;
+  }
+
+  .credit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .credit-item .credit-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--color-text);
+  }
+
+  .credit-item .credit-role {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    white-space: nowrap;
+    margin-left: 16px;
+  }
+
+  .btn-accent {
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .btn-accent:hover {
+    background: var(--color-accent-muted);
+    border-color: var(--color-accent-muted);
+  }
+
+  /* ============ CONTACT ============ */
+  .contact-section {
+    background: var(--color-bg-warm);
+    text-align: center;
+  }
+
+  .contact-section .section-title {
+    margin-bottom: 12px;
+  }
+
+  .contact-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 48px;
+  }
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .contact-info a {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2px;
+    transition: border-color 0.3s ease;
+  }
+
+  .contact-info a:hover {
+    border-color: var(--color-accent);
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .contact-links a {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .contact-links a:hover {
+    color: var(--color-accent);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 32px 40px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav .nav-links { gap: 20px; }
+    nav .nav-links a { font-size: 0.72rem; }
+
+    .hero { padding: 120px 24px 80px; }
+    section { padding: clamp(60px, 8vw, 100px) 24px; }
+
+    .framework-grid { grid-template-columns: 1fr; }
+    .work-grid { grid-template-columns: 1fr; }
+    .credits-grid { grid-template-columns: 1fr; }
+    .apple-stats { gap: 32px; }
+    .contact-info { flex-direction: column; gap: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    nav .nav-links { display: none; }
+    .apple-stats { flex-direction: column; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-name">Jonathan Bruno</a>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#apple">Apple</a></li>
+    <li><a href="#foundation">Foundation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Creative Director & Video Production Leader</div>
+  <h1>Jonathan Bruno</h1>
+  <p class="hero-sub">From Hollywood sets to Apple boardrooms — 17 years building stories that move people and strategies that move business.</p>
+  <div class="hero-line"></div>
+</header>
+
+<!-- THE THROUGH LINE -->
+<section class="story-section" id="story">
+  <div class="section-inner reveal">
+    <div class="section-label">The Through Line</div>
+    <div class="section-title">I didn't plan to become a creative director.<br>I planned to make movies.</div>
+
+    <p>After earning my BFA in Cinematography from Chapman University — where I was awarded both the Eastman Kodak and Panavision grants — I spent a decade in Hollywood doing exactly that. I shot indie features and national commercials for brands like L'Oreal Paris, Warner Bros, and Sony Pictures. I operated A-camera on <em>Bone Tomahawk</em> alongside Kurt Russell and worked second unit on Netflix's <em>Love</em>. My curiosity kept pulling me into unfamiliar rooms — performance capture stages for <em>God of War</em> and <em>Uncharted 4</em>, Alejandro González Iñárritu's VR installation <em>Carne Y Arena</em>, experimental projects at Uber. I wasn't chasing a title. I was chasing the work.</p>
+
+    <p>What I didn't realize at the time was that every new room was teaching me something beyond the camera. I was learning how to walk into a world I didn't fully understand, earn trust quickly, and deliver. That instinct — show up, learn the language, solve the problem — is what eventually carried me from set to strategy.</p>
+
+    <h3 class="story-heading">The Apple Years</h3>
+
+    <p>In 2017, Apple brought me in as a production specialist and filmmaker for their Worldwide Sales organization. The content the team was producing didn't yet meet the brand standard Apple is known for, and my job was to close that gap. I elevated the visual quality, produced customer stories and rich media that drove engagement across the consumer salesforce, and began creating bespoke video content designed to energize enterprise-level sales meetings — the kind of rooms where a B2B deal lives or dies based on whether you can establish credibility in the first ninety seconds.</p>
+
+    <p>That's where I learned the DNA of how Apple presents ideas. Not just keynotes — boardrooms. The pattern of establishing credibility, naming the problem, and revealing the solution through rich media. I had to internalize that rhythm and build it into everything we produced.</p>
+
+    <p>During 2020 and 2021, when the world went remote, I partnered closely with the Creative Director and Group Creative Director to find new ways to produce content under impossible constraints. My ability to flex into new methods and new media won me visibility with leadership — not because I asked for it, but because I kept solving problems no one else wanted to touch.</p>
+
+    <p>That credibility earned me a seat at the table. As Creative Art Director, I shifted from making the work to shaping the strategy behind it. I spent most of my time in planning meetings — learning what was coming across the business, and identifying where the creative team could have the most measurable impact. Not just polished videos for stakeholder buy-in, but work that would actually help close sales.</p>
+
+    <p>I took on one of the hardest verticals — healthcare — and built a suite of hero videos addressing the specific challenges enterprise salespeople face in that space. But I designed it modularly: a library of micro-vignettes that could be assembled to highlight specific Apple offerings without forcing a prospect to sit through a longer piece. I created the concept, wrote the scripts, aligned with the sales teams on their decks, then shepherded design managers and designers through the entire build. When it came time to sell the vision to leadership, I did the temp voice-over myself.</p>
+
+    <div class="framework">
+      <div class="framework-title">My Operating Model</div>
+      <div class="framework-grid">
+        <div class="framework-item">
+          <strong>Discover</strong>
+          <span>Research the initiative. Understand the real business need.</span>
+        </div>
+        <div class="framework-item">
+          <strong>Distill</strong>
+          <span>Break it down into business intent, measurability, and feasibility.</span>
+        </div>
+        <div class="framework-item">
+          <strong>Build</strong>
+          <span>Create pitches, mockups, and pre-visualizations to sell in the idea.</span>
+        </div>
+        <div class="framework-item">
+          <strong>Steer</strong>
+          <span>Determine internal vs. vendor execution, aligning vision with resources and bandwidth.</span>
+        </div>
+      </div>
+    </div>
+
+    <p>Then in 2023, the world changed and LLMs entered the modern vernacular. Suddenly, everything we were building had to stay internal and move fast. I applied the same model — discover, distill, build — but now focused on learning the technology itself, understanding the business vision behind each product, and translating it into clear, concise language for leadership at the highest levels of the company. Through the process of building sell-in content, our team found ourselves informing the design of the products themselves. Thinking through how an application would show up in the real world forced design teams to confront new ideas, usability standards, and ethical considerations they hadn't yet addressed.</p>
+
+    <p class="pullquote">By the end, our creative team had become something rare inside Apple: a brand agency, strategic consultancy, and production house — all in one.</p>
+
+    <h3 class="story-heading">What I'm Building Now</h3>
+
+    <p>I lead teams now. I form strategy. I help execute the vision.</p>
+
+    <p>My career taught me how to see — literally, through a lens — and that foundation gives me something most creative directors don't have: I understand the craft at a molecular level. But what I want to build is bigger than any single frame. Discover the need. Distill the strategy. Build the creative. Ship it. Repeat.</p>
+
+    <p>I'm looking for a team and a mission worth that effort.</p>
+  </div>
+</section>
+
+<!-- RECENT WORK -->
+<section class="work-section" id="work">
+  <div class="section-inner reveal">
+    <div class="section-label">Selected Projects</div>
+    <div class="section-title">Recent Work</div>
+
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="card-role">Creative Consultant</div>
+        <h3>Booksy — "Self-Made" Series</h3>
+        <p>Three branded documentary spots produced in partnership with Unknown Certainty, highlighting stylists and barbers who built their businesses from the ground up — and now run them entirely on Booksy.</p>
+        <div class="card-tags">Nas · Yashira · Taylor</div>
+      </div>
+
+      <div class="work-card">
+        <div class="card-role">Creative Consultant</div>
+        <h3>Yoshi Mobility — Launch Campaign</h3>
+        <p>Launch video campaign for the Bay Area mobility company providing on-the-spot vehicle fueling, fleet support, and mobile EV charging.</p>
+        <div class="card-tags">Yoshi Growth · Yoshi Mobility</div>
+      </div>
+
+      <div class="work-card">
+        <div class="card-role">Creative Consultant</div>
+        <h3>Taco Bell — Broadcast Spots</h3>
+        <p>Initially brought on as a lighting consultant for a brand partnership with NFL player Davante Adams. The success of the collaboration expanded into a creative consulting role across a run of nationally televised spots.</p>
+        <div class="card-tags">Two Dollar Nachos · Trio Cravings · Stackers Maker Fair · Churro Chillers · Low Riders</div>
+      </div>
+
+      <div class="work-card locked">
+        <div class="card-role">Producer / Creative Director</div>
+        <h3>Pura — Brand Vision Film</h3>
+        <p>Internal future-thinking brand vision film for the tech-forward fragrance company. Produced proofs of concept for future product lines and applications.</p>
+        <div class="card-tags">Available by request</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLE -->
+<section class="apple-section" id="apple">
+  <div class="section-inner reveal">
+    <div class="section-label">Creative Direction</div>
+    <div class="section-title">Apple — Worldwide Sales</div>
+
+    <div class="apple-stats">
+      <div class="apple-stat">
+        <span class="number">8</span>
+        <span class="label">Years</span>
+      </div>
+      <div class="apple-stat">
+        <span class="number">2</span>
+        <span class="label">Roles</span>
+      </div>
+      <div class="apple-stat">
+        <span class="number">1</span>
+        <span class="label">Transformation</span>
+      </div>
+    </div>
+
+    <p>During my tenure at Apple, I led video production and creative direction for the Worldwide Sales organization — producing content that reached global audiences, energized enterprise sales teams, and informed product design at the highest levels of the company.</p>
+
+    <p>Due to the confidential nature of this work, case studies are available by request.</p>
+
+    <a href="#contact" class="btn btn-light">Request Access</a>
+  </div>
+</section>
+
+<!-- FOUNDATION -->
+<section class="foundation-section" id="foundation">
+  <div class="section-inner reveal">
+    <div class="section-label">Cinematography & Filmmaking</div>
+    <div class="section-title">The Foundation</div>
+
+    <p class="intro">Before I led creative teams, I spent a decade behind the camera — on feature films, AAA game cinematics, VR experiences, and national commercials. This is where I learned to see, and it's the foundation everything else is built on.</p>
+
+    <div class="credits-grid">
+      <div class="credit-item">
+        <span class="credit-title">Bone Tomahawk</span>
+        <span class="credit-role">A Camera Operator</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-title">Counterpart (Starz)</span>
+        <span class="credit-role">Camera Op / Title Sequence DP</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-title">God of War</span>
+        <span class="credit-role">Perf. Capture Video Lead</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-title">Uncharted 4</span>
+        <span class="credit-role">Perf. Capture Video Lead</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-title">The Last of Us Part II</span>
+        <span class="credit-role">Perf. Capture Video Lead</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-title">Carne Y Arena</span>
+        <span class="credit-role">Perf. Capture Video Lead</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-title">Love S2 (Netflix)</span>
+        <span class="credit-role">2nd Unit DP</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-title">Chapman University</span>
+        <span class="credit-role">BFA, Cinematography</span>
+      </div>
+    </div>
+
+    <a href="http://www.jonathan-bruno.com/" class="btn btn-accent" target="_blank">View Cinematography Portfolio →</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-inner reveal">
+    <div class="section-label">Get in Touch</div>
+    <div class="section-title">Jonathan Bruno</div>
+    <p class="contact-subtitle">Creative Director & Video Production Leader · Bay Area, CA</p>
+
+    <div class="contact-info">
+      <a href="mailto:jbrunofilm@icloud.com">jbrunofilm@icloud.com</a>
+      <a href="tel:+13108809268">310.880.9268</a>
+    </div>
+
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/jonathan-bruno-9b99a013" target="_blank">LinkedIn</a>
+      <a href="https://imdb.com/name/nm2629267" target="_blank">IMDb</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Jonathan Bruno. All rights reserved.
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
