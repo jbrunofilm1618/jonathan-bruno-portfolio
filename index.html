@@ -865,6 +865,128 @@
     color: var(--color-accent);
   }
 
+  /* ============ PASSWORD GATE ============ */
+  .pura-gate-inner {
+    padding: 8px 0;
+  }
+
+  .pura-gate-label {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    margin-bottom: 12px;
+  }
+
+  .pura-gate-input {
+    display: flex;
+    gap: 8px;
+    max-width: 300px;
+  }
+
+  .pura-gate-input input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .pura-gate-input input:focus {
+    border-color: var(--color-accent);
+  }
+
+  .pura-gate-btn {
+    padding: 10px 16px;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .pura-gate-btn:hover {
+    background: var(--color-accent-decorative);
+  }
+
+  .pura-gate-error {
+    font-size: 0.78rem;
+    color: #b44;
+    margin-top: 8px;
+    min-height: 1.2em;
+  }
+
+  /* ============ CINEMATOGRAPHY REEL MODAL ============ */
+  .reel-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .reel-modal.open {
+    display: flex;
+  }
+
+  .reel-modal-inner {
+    width: 100%;
+    max-width: 1100px;
+    position: relative;
+  }
+
+  .reel-modal-close {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s ease;
+  }
+
+  .reel-modal-close:hover {
+    color: #fff;
+  }
+
+  .reel-modal-player {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .reel-modal-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (max-width: 768px) {
+    .reel-modal { padding: 20px; }
+    .reel-modal-close { top: -36px; font-size: 1.2rem; }
+  }
+
   /* ============ FOOTER ============ */
   footer {
     padding: 32px 40px;
@@ -878,44 +1000,63 @@
   .emdash-banner {
     background: var(--color-bg-dark);
     color: var(--color-text-on-dark);
-    padding: 14px 24px;
-    font-size: 0.82rem;
-    line-height: 1.6;
     position: relative;
     z-index: 150;
   }
 
-  .emdash-banner-inner {
+  .emdash-banner.dismissed {
+    display: none;
+  }
+
+  .emdash-banner-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 24px;
+    cursor: pointer;
     max-width: 900px;
     margin: 0 auto;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
   }
 
   .emdash-banner-title {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--color-accent-muted);
-    white-space: nowrap;
   }
 
-  .emdash-banner-text {
-    color: rgba(247, 245, 242, 0.75);
-    flex: 1;
+  .emdash-banner-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .emdash-expand {
+    background: none;
+    border: none;
+    color: var(--color-accent-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .emdash-banner.open .emdash-expand {
+    transform: rotate(45deg);
   }
 
   .emdash-close {
     background: none;
     border: none;
-    color: rgba(247, 245, 242, 0.4);
-    font-size: 0.9rem;
+    color: rgba(247, 245, 242, 0.3);
+    font-size: 0.75rem;
     cursor: pointer;
-    padding: 4px 8px;
-    margin-left: auto;
-    flex-shrink: 0;
+    padding: 0;
     transition: color 0.2s ease;
   }
 
@@ -923,8 +1064,23 @@
     color: var(--color-text-on-dark);
   }
 
-  .emdash-banner.hidden {
-    display: none;
+  .emdash-banner-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 24px;
+  }
+
+  .emdash-banner.open .emdash-banner-body {
+    max-height: 200px;
+    padding: 0 24px 14px;
+  }
+
+  .emdash-banner-text {
+    color: rgba(247, 245, 242, 0.75);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    max-width: 900px;
   }
 
   /* ============ ACCESSIBILITY PANEL ============ */
@@ -1214,18 +1370,94 @@
     nav .nav-links a { font-size: 0.72rem; }
 
     .hero { padding: 120px 24px 80px; }
+    .hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+    .hero-sub { font-size: 1rem; }
     section { padding: clamp(60px, 8vw, 100px) 24px; }
 
-    .framework-grid { grid-template-columns: 1fr; }
+    /* Story */
+    .story-section .section-opener { font-size: 1rem; }
+    .story-section .story-heading { font-size: 1.25rem; }
+    .story-section .pullquote { font-size: 1.2rem; padding-left: 20px; }
+    .story-section p { font-size: 0.95rem; }
+
+    /* OODA Loop */
+    .framework-loop { flex-direction: column; gap: 32px; }
+    .framework-circle { width: 240px; height: 240px; }
+    .framework-descriptions { max-width: 100%; }
+    .framework-desc-item { grid-template-columns: 80px 1fr; }
+    .framework { padding: 28px 24px; }
+
+    /* Work cards */
     .work-grid { grid-template-columns: 1fr; }
-    .credits-grid { grid-template-columns: 1fr; }
+    .work-card { padding: 28px 24px; }
+    .work-card h3 { font-size: 1.15rem; }
+    .card-video-nav button { padding: 8px 12px; font-size: 0.78rem; }
+
+    /* Apple section */
     .apple-stats { gap: 32px; }
+    .apple-stat .number { font-size: 2rem; }
+    .apple-section p { font-size: 0.95rem; }
+
+    /* Foundation / Credits */
+    .credits-and-buttons { grid-template-columns: 1fr; gap: 12px 0; }
+    .credit-item .credit-role { white-space: normal; margin-left: 12px; }
+
+    .foundation-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .foundation-buttons .btn {
+      text-align: center;
+      font-size: 0.78rem;
+      padding: 14px 20px;
+    }
+
+    /* Contact */
+    .contact-section { padding: 60px 24px; }
     .contact-info { flex-direction: column; gap: 16px; }
+    .contact-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .contact-subtitle { font-size: 0.95rem; }
+
+    /* Footer */
+    footer { padding: 24px; font-size: 0.78rem; }
+
+    /* Accessibility panel */
+    .a11y-toggle { bottom: 16px; right: 16px; }
+    .a11y-panel { bottom: 72px; right: 16px; width: 240px; padding: 20px; }
   }
 
   @media (max-width: 480px) {
     nav .nav-links { display: none; }
+
+    .hero h1 { font-size: 2rem; }
+    .hero-sub { font-size: 0.92rem; max-width: 100%; }
+    .hero-label { font-size: 0.7rem; }
+
     .apple-stats { flex-direction: column; gap: 24px; }
+
+    .credit-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .credit-item .credit-role {
+      margin-left: 0;
+      font-size: 0.78rem;
+    }
+
+    .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+
+    .framework-circle { width: 200px; height: 200px; }
+    .framework-desc-item { grid-template-columns: 70px 1fr; }
+    .framework-desc-item strong { font-size: 0.88rem; }
+    .framework-desc-item span { font-size: 0.82rem; }
+
+    .card-video-nav { gap: 6px; }
+    .card-video-nav button { padding: 6px 10px; font-size: 0.75rem; }
+
+    .emdash-banner-text { font-size: 0.78rem; }
   }
 </style>
 </head>
@@ -1233,10 +1465,15 @@
 
 <!-- EM-DASH BANNER -->
 <div class="emdash-banner" id="emdashBanner">
-  <div class="emdash-banner-inner">
-    <span class="emdash-banner-title">A word on the em-dash.</span>
+  <div class="emdash-banner-header" id="emdashHeader">
+    <span class="emdash-banner-title">On the em-dash.</span>
+    <div class="emdash-banner-controls">
+      <button class="emdash-expand" id="emdashExpand" aria-label="Expand">+</button>
+      <button class="emdash-close" id="emdashClose" aria-label="Dismiss banner">✕</button>
+    </div>
+  </div>
+  <div class="emdash-banner-body">
     <span class="emdash-banner-text">I have enjoyed the em-dash for years — as a visual amplifier for writing prose — well before the proliferation of LLM usage. In my early days at Apple, the em-dash was a quintessential part of the Apple copywriting style guide. As such, I happily and garrulously continue to use it in my writing, even if it raises concerns of AI authorship or sloppy editing. It's elegant, it's decisive, and it gives neurodivergent readers a clean visual break between thoughts. Eat your heart out, Chat.</span>
-    <button class="emdash-close" id="emdashClose" aria-label="Close banner">✕</button>
   </div>
 </div>
 <a href="#story" class="skip-link">Skip to main content</a>
@@ -1389,11 +1626,33 @@
         <div class="card-tags">Davante Adams Partnership · Two Dollar Nachos · Trio Cravings · Stackers Maker Fair · Churro Chillers · Low Riders</div>
       </div>
 
-      <div class="work-card locked">
+      <div class="work-card expandable" id="pura-card">
         <div class="card-role">Producer / Creative Director</div>
         <h3>Pura — Brand Vision Film</h3>
         <p>Internal future-thinking brand vision film for the tech-forward fragrance company. Produced proofs of concept for future product lines and applications.</p>
-        <div class="card-tags">Available by request</div>
+        <div class="card-tags">Password Protected</div>
+        <button class="card-toggle" onclick="togglePuraGate()">View Work <span class="toggle-arrow" id="pura-arrow">▶</span></button>
+
+        <div class="card-expanded-content" id="pura-expanded">
+          <!-- Password gate -->
+          <div id="pura-gate">
+            <div class="pura-gate-inner">
+              <label for="pura-pw" class="pura-gate-label">Enter password to view</label>
+              <div class="pura-gate-input">
+                <input type="password" id="pura-pw" placeholder="Password" onkeydown="if(event.key==='Enter') checkPuraPassword()">
+                <button onclick="checkPuraPassword()" class="pura-gate-btn">→</button>
+              </div>
+              <div id="pura-error" class="pura-gate-error"></div>
+            </div>
+          </div>
+          <!-- Video (hidden until password entered) -->
+          <div id="pura-content" style="display:none;">
+            <div class="card-video-title">Pura — Brand Vision Film</div>
+            <div class="card-video-player">
+              <iframe id="pura-player" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1470,7 +1729,7 @@
         <span class="credit-role">BFA, Cinematography</span>
       </div>
       <div class="foundation-buttons">
-        <a href="http://www.jonathan-bruno.com/" class="btn btn-accent" target="_blank">View Cinematography Portfolio →</a>
+        <a href="#" class="btn btn-accent" onclick="openReel(); return false;">View Cinematography Reel →</a>
         <a href="https://imdb.com/name/nm2629267" class="btn btn-accent" target="_blank">View IMDb Credits →</a>
       </div>
     </div>
@@ -1495,6 +1754,16 @@
     </div>
   </div>
 </section>
+
+<!-- CINEMATOGRAPHY REEL MODAL -->
+<div class="reel-modal" id="reelModal">
+  <div class="reel-modal-inner">
+    <button class="reel-modal-close" onclick="closeReel()" aria-label="Close reel">✕</button>
+    <div class="reel-modal-player">
+      <iframe id="reelPlayer" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 
 <footer role="contentinfo">
   &copy; 2026 Jonathan Bruno. All rights reserved.
@@ -1554,6 +1823,59 @@
     frameworkObserver.observe(framework);
   }
 
+  // Pura password gate
+  function togglePuraGate() {
+    const card = document.getElementById('pura-card');
+    card.classList.toggle('expanded');
+  }
+
+  async function checkPuraPassword() {
+    const input = document.getElementById('pura-pw');
+    const error = document.getElementById('pura-error');
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input.value);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    if (hash === 'ab48e7373f02573ebc193ef2ba8014e81e5f7449f3fab7037658e8babff3792b') {
+      document.getElementById('pura-gate').style.display = 'none';
+      document.getElementById('pura-content').style.display = 'block';
+      document.getElementById('pura-player').src = 'https://player.vimeo.com/video/874161575?h=060c8fef04';
+    } else {
+      error.textContent = 'Incorrect password. Please try again.';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  // Cinematography reel modal
+  function openReel() {
+    const modal = document.getElementById('reelModal');
+    const player = document.getElementById('reelPlayer');
+    player.src = 'https://player.vimeo.com/video/107436067?autoplay=1';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeReel() {
+    const modal = document.getElementById('reelModal');
+    const player = document.getElementById('reelPlayer');
+    player.src = '';
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close reel on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeReel();
+  });
+
+  // Close reel on clicking backdrop
+  document.getElementById('reelModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeReel();
+  });
+
   // Expandable work cards
   function toggleCard(cardId) {
     const card = document.getElementById(cardId);
@@ -1572,14 +1894,25 @@
     btn.classList.add('active');
   }
 
-  // Em-dash banner dismiss
+  // Em-dash banner
   const emdashBanner = document.getElementById('emdashBanner');
+  const emdashHeader = document.getElementById('emdashHeader');
+  const emdashExpand = document.getElementById('emdashExpand');
   const emdashClose = document.getElementById('emdashClose');
+
   if (sessionStorage.getItem('emdash-dismissed') === 'true') {
-    emdashBanner.classList.add('hidden');
+    emdashBanner.classList.add('dismissed');
   }
-  emdashClose.addEventListener('click', () => {
-    emdashBanner.classList.add('hidden');
+
+  emdashHeader.addEventListener('click', (e) => {
+    if (e.target === emdashClose) return;
+    emdashBanner.classList.toggle('open');
+    emdashExpand.textContent = emdashBanner.classList.contains('open') ? '+' : '+';
+  });
+
+  emdashClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    emdashBanner.classList.add('dismissed');
     sessionStorage.setItem('emdash-dismissed', 'true');
   });
 
