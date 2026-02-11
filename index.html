@@ -104,6 +104,157 @@
     color: var(--color-text);
   }
 
+  /* ============ MOBILE MENU ============ */
+  .nav-mobile-actions {
+    display: none;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-resume-mobile {
+    display: none;
+    position: relative;
+  }
+
+  .nav-resume-btn-mobile {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .nav-resume-btn-mobile:hover {
+    background: var(--color-accent-muted);
+  }
+
+  .nav-resume-dropdown-mobile {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 200;
+    min-width: 90px;
+  }
+
+  .nav-resume-mobile.open .nav-resume-dropdown-mobile {
+    display: block;
+  }
+
+  .nav-resume-dropdown-mobile a {
+    display: block;
+    padding: 10px 14px;
+    font-size: 0.75rem;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .nav-resume-dropdown-mobile a:hover {
+    background: var(--color-bg-warm);
+  }
+
+  .nav-resume-dropdown-mobile a + a {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 110;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav-hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  @media (max-width: 480px) {
+    .nav-mobile-actions {
+      display: flex;
+    }
+
+    .nav-resume-mobile {
+      display: block;
+    }
+
+    .nav-hamburger {
+      display: block;
+    }
+
+    nav .nav-links {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(247, 245, 242, 0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      z-index: 105;
+      padding: 0;
+    }
+
+    nav .nav-links.mobile-open {
+      display: flex;
+    }
+
+    nav .nav-links a {
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+    }
+
+    nav .nav-links li {
+      list-style: none;
+    }
+
+    .nav-resume-btn {
+      font-size: 0.85rem;
+      padding: 10px 24px;
+    }
+
+    .nav-resume-dropdown {
+      position: static;
+      box-shadow: none;
+      border: 1px solid var(--color-border);
+      margin-top: 8px;
+    }
+  }
+
   /* ============ NAV RESUME DROPDOWN ============ */
   .nav-resume-wrap {
     position: relative;
@@ -177,8 +328,8 @@
   }
 
   .hero-label {
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-accent);
@@ -258,8 +409,8 @@
   }
 
   .section-label {
-    font-size: 0.82rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-accent);
@@ -317,8 +468,8 @@
   }
 
   .framework-title {
-    font-size: 0.82rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-accent);
@@ -328,7 +479,7 @@
 
   .framework-loop {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: 48px;
     flex-wrap: wrap;
@@ -339,7 +490,6 @@
     width: 280px;
     height: 280px;
     flex-shrink: 0;
-    margin-top: 90px;
   }
 
   .framework-circle svg {
@@ -513,12 +663,12 @@
   @media (max-width: 768px) {
     .framework-loop {
       flex-direction: column;
+      align-items: center;
       gap: 32px;
     }
     .framework-circle {
       width: 220px;
       height: 220px;
-      margin-top: 0;
     }
     .framework-descriptions {
       max-width: 100%;
@@ -1513,7 +1663,10 @@
   @media (max-width: 480px) {
     html { font-size: 17px; }
 
-    nav .nav-links { display: none; }
+    .hero {
+      min-height: auto;
+      padding: 100px 24px 60px;
+    }
 
     .hero h1 { font-size: 2rem; }
     .hero-sub { font-size: 0.92rem; max-width: 100%; }
@@ -1568,7 +1721,21 @@
 <!-- NAV -->
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-name">Jonathan Bruno</a>
-  <ul class="nav-links">
+  <div class="nav-mobile-actions">
+    <div class="nav-resume-mobile" id="navResumeMobile">
+      <button class="nav-resume-btn-mobile" onclick="this.parentElement.classList.toggle('open')">Résumé ↓</button>
+      <div class="nav-resume-dropdown-mobile">
+        <a href="Jonathan_Bruno_Resume.pdf" download>PDF</a>
+        <a href="Jonathan_Bruno_Resume.docx" download>DOCX</a>
+      </div>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  </div>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#story">Story</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#apple">Apple</a></li>
@@ -1988,11 +2155,32 @@
     btn.classList.add('active');
   }
 
+  // Mobile hamburger menu
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('mobile-open');
+  });
+
+  // Close mobile menu on link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('mobile-open');
+    });
+  });
+
   // Close resume dropdown on click outside
   document.addEventListener('click', (e) => {
     const wrap = document.querySelector('.nav-resume-wrap');
     if (wrap && !wrap.contains(e.target)) {
       wrap.classList.remove('open');
+    }
+    const mobileWrap = document.getElementById('navResumeMobile');
+    if (mobileWrap && !mobileWrap.contains(e.target)) {
+      mobileWrap.classList.remove('open');
     }
   });
 
