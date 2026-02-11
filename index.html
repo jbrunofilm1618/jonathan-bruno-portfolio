@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light only">
 <title>Jonathan Bruno — Creative Director & Video Production Leader</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: light only;
     --color-bg: #F7F5F2;
     --color-bg-warm: #EFEAE4;
     --color-bg-dark: #1A1A1A;
@@ -52,7 +55,7 @@
   /* ============ NAV ============ */
   nav {
     position: fixed;
-    top: 0;
+    top: 42px;
     left: 0;
     right: 0;
     z-index: 100;
@@ -60,7 +63,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background 0.4s ease, box-shadow 0.4s ease;
+    transition: background 0.4s ease, box-shadow 0.4s ease, top 0.3s ease;
+  }
+
+  body.banner-dismissed nav {
+    top: 0;
   }
 
   nav.scrolled {
@@ -95,6 +102,67 @@
 
   nav .nav-links a:hover {
     color: var(--color-text);
+  }
+
+  /* ============ NAV RESUME DROPDOWN ============ */
+  .nav-resume-wrap {
+    position: relative;
+  }
+
+  .nav-resume-btn {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .nav-resume-btn:hover {
+    background: var(--color-accent-muted);
+  }
+
+  .nav-resume-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 200;
+    min-width: 100px;
+  }
+
+  .nav-resume-wrap.open .nav-resume-dropdown {
+    display: block;
+  }
+
+  .nav-resume-dropdown a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .nav-resume-dropdown a:hover {
+    background: var(--color-bg-warm);
+  }
+
+  .nav-resume-dropdown a + a {
+    border-top: 1px solid var(--color-border);
   }
 
   /* ============ HERO ============ */
@@ -260,7 +328,7 @@
 
   .framework-loop {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 48px;
     flex-wrap: wrap;
@@ -271,6 +339,7 @@
     width: 280px;
     height: 280px;
     flex-shrink: 0;
+    margin-top: 90px;
   }
 
   .framework-circle svg {
@@ -282,8 +351,8 @@
   .framework-circle .loop-ring {
     fill: none;
     stroke: var(--color-accent-decorative);
-    stroke-width: 2;
-    opacity: 0.4;
+    stroke-width: 2.5;
+    opacity: 0.6;
     stroke-dasharray: 641;
     stroke-dashoffset: 641;
     transition: none;
@@ -381,7 +450,8 @@
 
   .framework-circle .loop-label {
     font-family: var(--font-display);
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 700;
     fill: var(--color-text);
     text-anchor: middle;
     dominant-baseline: central;
@@ -446,8 +516,9 @@
       gap: 32px;
     }
     .framework-circle {
-      width: 240px;
-      height: 240px;
+      width: 220px;
+      height: 220px;
+      margin-top: 0;
     }
     .framework-descriptions {
       max-width: 100%;
@@ -1000,8 +1071,11 @@
   .emdash-banner {
     background: var(--color-bg-dark);
     color: var(--color-text-on-dark);
-    position: relative;
-    z-index: 150;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
   }
 
   .emdash-banner.dismissed {
@@ -1365,6 +1439,8 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 768px) {
+    html { font-size: 18px; }
+
     nav { padding: 16px 24px; }
     nav .nav-links { gap: 20px; }
     nav .nav-links a { font-size: 0.72rem; }
@@ -1375,32 +1451,38 @@
     section { padding: clamp(60px, 8vw, 100px) 24px; }
 
     /* Story */
-    .story-section .section-opener { font-size: 1rem; }
-    .story-section .story-heading { font-size: 1.25rem; }
+    .story-section .section-opener { font-size: 1.05rem; }
+    .story-section .story-heading { font-size: 1.3rem; }
     .story-section .pullquote { font-size: 1.2rem; padding-left: 20px; }
-    .story-section p { font-size: 0.95rem; }
+    .story-section p { font-size: 1rem; line-height: 1.85; }
 
     /* OODA Loop */
-    .framework-loop { flex-direction: column; gap: 32px; }
-    .framework-circle { width: 240px; height: 240px; }
+    .framework { padding: 28px 20px; margin: 32px 0; }
+    .framework-title { font-size: 0.72rem; letter-spacing: 0.1em; margin-bottom: 20px; }
+    .framework-loop { flex-direction: column; gap: 28px; }
+    .framework-circle { width: 220px; height: 220px; }
     .framework-descriptions { max-width: 100%; }
-    .framework-desc-item { grid-template-columns: 80px 1fr; }
-    .framework { padding: 28px 24px; }
+    .framework-desc-item { grid-template-columns: 80px 1fr; gap: 0 12px; padding: 14px 0; }
+    .framework-desc-item strong { font-size: 0.95rem; }
+    .framework-desc-item span { font-size: 0.9rem; line-height: 1.6; }
+    .framework-desc-divider { margin: 0; }
 
     /* Work cards */
     .work-grid { grid-template-columns: 1fr; }
     .work-card { padding: 28px 24px; }
     .work-card h3 { font-size: 1.15rem; }
+    .work-card p { font-size: 0.95rem; }
     .card-video-nav button { padding: 8px 12px; font-size: 0.78rem; }
 
     /* Apple section */
     .apple-stats { gap: 32px; }
     .apple-stat .number { font-size: 2rem; }
-    .apple-section p { font-size: 0.95rem; }
+    .apple-section p { font-size: 1rem; line-height: 1.85; }
 
     /* Foundation / Credits */
     .credits-and-buttons { grid-template-columns: 1fr; gap: 12px 0; }
     .credit-item .credit-role { white-space: normal; margin-left: 12px; }
+    .foundation-section p.intro { font-size: 1rem; }
 
     .foundation-buttons {
       flex-direction: column;
@@ -1409,18 +1491,19 @@
 
     .foundation-buttons .btn {
       text-align: center;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       padding: 14px 20px;
     }
 
     /* Contact */
     .contact-section { padding: 60px 24px; }
     .contact-info { flex-direction: column; gap: 16px; }
+    .contact-info a { font-size: 1rem; }
     .contact-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
-    .contact-subtitle { font-size: 0.95rem; }
+    .contact-subtitle { font-size: 1rem; }
 
     /* Footer */
-    footer { padding: 24px; font-size: 0.78rem; }
+    footer { padding: 24px; font-size: 0.82rem; }
 
     /* Accessibility panel */
     .a11y-toggle { bottom: 16px; right: 16px; }
@@ -1428,6 +1511,8 @@
   }
 
   @media (max-width: 480px) {
+    html { font-size: 17px; }
+
     nav .nav-links { display: none; }
 
     .hero h1 { font-size: 2rem; }
@@ -1444,15 +1529,17 @@
 
     .credit-item .credit-role {
       margin-left: 0;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
     }
 
     .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
 
-    .framework-circle { width: 200px; height: 200px; }
-    .framework-desc-item { grid-template-columns: 70px 1fr; }
-    .framework-desc-item strong { font-size: 0.88rem; }
-    .framework-desc-item span { font-size: 0.82rem; }
+    /* OODA tighter on small phones */
+    .framework { padding: 24px 16px; }
+    .framework-circle { width: 180px; height: 180px; }
+    .framework-desc-item { grid-template-columns: 72px 1fr; }
+    .framework-desc-item strong { font-size: 0.9rem; }
+    .framework-desc-item span { font-size: 0.85rem; }
 
     .card-video-nav { gap: 6px; }
     .card-video-nav button { padding: 6px 10px; font-size: 0.75rem; }
@@ -1487,6 +1574,13 @@
     <li><a href="#apple">Apple</a></li>
     <li><a href="#foundation">Foundation</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li class="nav-resume-wrap">
+      <button class="nav-resume-btn" onclick="this.parentElement.classList.toggle('open')">Résumé ↓</button>
+      <div class="nav-resume-dropdown">
+        <a href="Jonathan_Bruno_Resume.pdf" download>PDF</a>
+        <a href="Jonathan_Bruno_Resume.docx" download>DOCX</a>
+      </div>
+    </li>
   </ul>
 </nav>
 
@@ -1541,10 +1635,10 @@
             <text class="loop-label loop-label-steer" x="54" y="142">Steer</text>
 
             <!-- Dots on the ring -->
-            <circle class="loop-dot loop-dot-discover" cx="170" cy="38" r="3.5" fill="var(--color-accent)" />
-            <circle class="loop-dot loop-dot-distill" cx="272" cy="140" r="3.5" fill="var(--color-accent)" />
-            <circle class="loop-dot loop-dot-build" cx="170" cy="242" r="3.5" fill="var(--color-accent)" />
-            <circle class="loop-dot loop-dot-steer" cx="68" cy="140" r="3.5" fill="var(--color-accent)" />
+            <circle class="loop-dot loop-dot-discover" cx="170" cy="38" r="4.5" fill="var(--color-accent)" />
+            <circle class="loop-dot loop-dot-distill" cx="272" cy="140" r="4.5" fill="var(--color-accent)" />
+            <circle class="loop-dot loop-dot-build" cx="170" cy="242" r="4.5" fill="var(--color-accent)" />
+            <circle class="loop-dot loop-dot-steer" cx="68" cy="140" r="4.5" fill="var(--color-accent)" />
           </svg>
         </div>
         <div class="framework-descriptions">
@@ -1894,6 +1988,14 @@
     btn.classList.add('active');
   }
 
+  // Close resume dropdown on click outside
+  document.addEventListener('click', (e) => {
+    const wrap = document.querySelector('.nav-resume-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+      wrap.classList.remove('open');
+    }
+  });
+
   // Em-dash banner
   const emdashBanner = document.getElementById('emdashBanner');
   const emdashHeader = document.getElementById('emdashHeader');
@@ -1902,17 +2004,18 @@
 
   if (sessionStorage.getItem('emdash-dismissed') === 'true') {
     emdashBanner.classList.add('dismissed');
+    document.body.classList.add('banner-dismissed');
   }
 
   emdashHeader.addEventListener('click', (e) => {
     if (e.target === emdashClose) return;
     emdashBanner.classList.toggle('open');
-    emdashExpand.textContent = emdashBanner.classList.contains('open') ? '+' : '+';
   });
 
   emdashClose.addEventListener('click', (e) => {
     e.stopPropagation();
     emdashBanner.classList.add('dismissed');
+    document.body.classList.add('banner-dismissed');
     sessionStorage.setItem('emdash-dismissed', 'true');
   });
 
