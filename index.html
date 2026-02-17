@@ -7,6 +7,13 @@
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light only">
 <title>Jonathan Bruno — Creative Director & Video Production Leader</title>
+<meta property="og:title" content="Jonathan Bruno — Creative Director & Video Production Leader">
+<meta property="og:description" content="From Hollywood sets to Apple boardrooms — 17 years building stories that move people and strategies that move business.">
+<meta property="og:image" content="https://jonathan-bruno.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://jonathan-bruno.com">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A1A1A'/%3E%3Ctext x='3' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' fill='%238B6914'%3EJB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,7 +89,6 @@
     height: 40px;
     background: linear-gradient(to bottom, rgba(247, 245, 242, 0.6), rgba(247, 245, 242, 0));
     pointer-events: none;
-    z-index: -1;
   }
 
   body.banner-dismissed nav {
@@ -1656,7 +1662,7 @@
     .story-section .pullquote { font-size: 1.2rem; padding-left: 20px; }
     .story-section p { font-size: 1rem; line-height: 1.85; }
 
-    /* ARCS Loop */
+    /* EDGE Loop */
     .framework { padding: 28px 20px; margin: 32px 0; }
     .framework-title { font-size: 0.72rem; letter-spacing: 0.1em; margin-bottom: 20px; }
     .framework-loop { flex-direction: column; gap: 28px; }
@@ -1737,7 +1743,7 @@
 
     .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
 
-    /* ARCS tighter on small phones */
+    /* EDGE tighter on small phones */
     .framework { padding: 24px 16px; }
     .framework-circle { width: 180px; height: 180px; }
     .framework-desc-item { grid-template-columns: 72px 1fr; }
@@ -2101,7 +2107,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
@@ -2133,7 +2139,7 @@
           frameworkObserver.unobserve(framework);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1 });
     frameworkObserver.observe(framework);
   }
 
