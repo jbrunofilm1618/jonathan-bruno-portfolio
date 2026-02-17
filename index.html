@@ -65,7 +65,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background 0.4s ease, box-shadow 0.4s ease, top 0.3s ease, transform 0.35s ease;
+    transition: background 0.4s ease, box-shadow 0.4s ease, top 0.3s ease;
   }
 
   body.banner-dismissed nav {
@@ -73,17 +73,10 @@
   }
 
   nav.scrolled {
-    background: rgba(247, 245, 242, 0.97);
-    backdrop-filter: blur(12px);
+    background: rgba(247, 245, 242, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 1px 0 var(--color-border);
-  }
-
-  nav.nav-hidden {
-    transform: translateY(-100%);
-  }
-
-  nav.nav-visible {
-    transform: translateY(0);
   }
 
   nav .nav-name {
@@ -210,7 +203,7 @@
     transform: rotate(-45deg) translate(5px, -5px);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 900px) {
     .nav-mobile-actions {
       display: flex;
     }
@@ -255,6 +248,10 @@
     .nav-resume-btn {
       font-size: 0.85rem;
       padding: 10px 24px;
+    }
+
+    .nav-resume-wrap {
+      display: none;
     }
 
     .nav-resume-dropdown {
@@ -2091,38 +2088,10 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Nav scroll effect — hide on scroll down, show on scroll up
+  // Nav scroll effect
   const nav = document.getElementById('nav');
-  let lastScrollY = window.scrollY;
-  let scrollThreshold = 5;
-
   window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-    
-    // Add background when scrolled past hero
-    nav.classList.toggle('scrolled', currentScrollY > 60);
-    
-    // At the top of the page, always show
-    if (currentScrollY <= 60) {
-      nav.classList.remove('nav-hidden');
-      nav.classList.remove('nav-visible');
-      lastScrollY = currentScrollY;
-      return;
-    }
-    
-    const delta = currentScrollY - lastScrollY;
-    
-    if (delta > scrollThreshold) {
-      // Scrolling down — hide nav
-      nav.classList.add('nav-hidden');
-      nav.classList.remove('nav-visible');
-    } else if (delta < -scrollThreshold) {
-      // Scrolling up — show nav with opaque background
-      nav.classList.remove('nav-hidden');
-      nav.classList.add('nav-visible');
-    }
-    
-    lastScrollY = currentScrollY;
+    nav.classList.toggle('scrolled', window.scrollY > 10);
   });
 
   // Reveal on scroll — content visible by default, animation is progressive enhancement
