@@ -65,7 +65,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background 0.4s ease, box-shadow 0.4s ease, top 0.3s ease;
+    background: rgba(240, 237, 233, 0.7);
+    backdrop-filter: blur(40px) saturate(1.4) brightness(0.92);
+    -webkit-backdrop-filter: blur(40px) saturate(1.4) brightness(0.92);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    transition: top 0.3s ease;
   }
 
   body.banner-dismissed nav {
