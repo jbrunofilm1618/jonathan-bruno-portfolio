@@ -580,20 +580,40 @@
     display: none;
   }
 
-  /* Descriptions fade in after circle completes */
-  .framework-descriptions {
+  /* Description items — eyelid reveal one by one after nodes land */
+  .framework-desc-item,
+  .framework-desc-divider {
     opacity: 1;
-    transform: none;
+    clip-path: inset(0 0);
     transition: none;
   }
 
-  .framework.will-animate .framework-descriptions {
+  .framework.will-animate .framework-desc-item,
+  .framework.will-animate .framework-desc-divider {
     opacity: 0;
-    transform: translateY(16px);
+    clip-path: inset(50% 0);
   }
 
-  .framework.animated .framework-descriptions {
-    animation: descFadeIn 0.8s ease 3.2s forwards;
+  .framework.animated .framework-descriptions > :nth-child(1) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.4s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(2) {
+    animation: dividerReveal 0.35s ease 3.85s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(3) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 4.0s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(4) {
+    animation: dividerReveal 0.35s ease 4.45s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(5) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 4.6s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(6) {
+    animation: dividerReveal 0.35s ease 5.05s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(7) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 5.2s forwards;
   }
 
   /* Title */
@@ -618,8 +638,14 @@
     to { opacity: 1; }
   }
 
-  @keyframes descFadeIn {
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes eyelidReveal {
+    from { clip-path: inset(50% 0); opacity: 0; }
+    to   { clip-path: inset(0% 0);  opacity: 1; }
+  }
+
+  @keyframes dividerReveal {
+    from { clip-path: inset(50% 0); opacity: 0; }
+    to   { clip-path: inset(0% 0);  opacity: 0.5; }
   }
 
   /* Reduced motion override */
@@ -627,11 +653,13 @@
   body.reduce-motion .framework .loop-label,
   body.reduce-motion .framework .loop-dot,
   body.reduce-motion .framework .framework-title,
-  body.reduce-motion .framework .framework-descriptions {
+  body.reduce-motion .framework .framework-desc-item,
+  body.reduce-motion .framework .framework-desc-divider {
     animation: none !important;
     opacity: 1 !important;
     stroke-dashoffset: 0 !important;
     transform: none !important;
+    clip-path: none !important;
   }
 
   .framework-circle .loop-fiber-1,
@@ -1598,7 +1626,13 @@
     }
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
+      animation-delay: 0ms !important;
       transition-duration: 0.001ms !important;
+    }
+    .framework.will-animate .framework-desc-item,
+    .framework.will-animate .framework-desc-divider {
+      clip-path: none !important;
+      opacity: 1 !important;
     }
   }
 
@@ -2061,7 +2095,7 @@
     <p class="contact-subtitle">Creative Director & Video Production Leader · Bay Area, CA</p>
 
     <div class="contact-info">
-      <a href="/cdn-cgi/l/email-protection#600a0212150e0f06090c0d2009030c0f15044e030f0d"><span class="__cf_email__" data-cfemail="a0cac2d2d5cecfc6c9cccde0c9c3cccfd5c48ec3cfcd">[email&#160;protected]</span></a>
+      <a href="mailto:jbrunofilm@icloud.com">jbrunofilm@icloud.com</a>
       <a href="tel:+13108809268">310.880.9268</a>
     </div>
 
@@ -2310,4 +2344,10 @@
   });
 
   reduceMotion.addEventListener('change', () => {
-    document.body.classLi
+    document.body.classList.toggle('reduce-motion', reduceMotion.checked);
+    document.documentElement.style.scrollBehavior = reduceMotion.checked ? 'auto' : '';
+    localStorage.setItem('a11y-reduce-motion', reduceMotion.checked);
+  });
+</script>
+</body>
+</html>
