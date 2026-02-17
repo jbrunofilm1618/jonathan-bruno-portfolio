@@ -65,7 +65,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background 0.4s ease, box-shadow 0.4s ease, top 0.3s ease;
+    transition: background 0.4s ease, box-shadow 0.4s ease, top 0.3s ease, transform 0.35s ease;
   }
 
   body.banner-dismissed nav {
@@ -73,9 +73,17 @@
   }
 
   nav.scrolled {
-    background: rgba(247, 245, 242, 0.95);
+    background: rgba(247, 245, 242, 0.97);
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 0 var(--color-border);
+  }
+
+  nav.nav-hidden {
+    transform: translateY(-100%);
+  }
+
+  nav.nav-visible {
+    transform: translateY(0);
   }
 
   nav .nav-name {
@@ -506,8 +514,12 @@
     stroke-width: 2.5;
     opacity: 0.6;
     stroke-dasharray: 641;
-    stroke-dashoffset: 641;
+    stroke-dashoffset: 0;
     transition: none;
+  }
+
+  .framework.will-animate .loop-ring {
+    stroke-dashoffset: 641;
   }
 
   .framework.animated .loop-ring {
@@ -517,8 +529,13 @@
   /* Labels fade in sequentially after ring draws */
   .framework-circle .loop-label,
   .framework-circle .loop-dot {
-    opacity: 0;
+    opacity: 1;
     transition: none;
+  }
+
+  .framework.will-animate .loop-label,
+  .framework.will-animate .loop-dot {
+    opacity: 0;
   }
 
   .framework.animated .loop-label-discover,
@@ -548,9 +565,14 @@
 
   /* Descriptions fade in after circle completes */
   .framework-descriptions {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .framework.will-animate .framework-descriptions {
     opacity: 0;
     transform: translateY(16px);
-    transition: none;
   }
 
   .framework.animated .framework-descriptions {
@@ -559,8 +581,12 @@
 
   /* Title */
   .framework .framework-title {
-    opacity: 0;
+    opacity: 1;
     transition: none;
+  }
+
+  .framework.will-animate .framework-title {
+    opacity: 0;
   }
 
   .framework.animated .framework-title {
@@ -1800,7 +1826,7 @@
       <div class="framework-title">The Creative EDGE — My Development Framework</div>
       <div class="framework-loop">
         <div class="framework-circle">
-          <svg viewBox="0 0 340 280">
+          <svg viewBox="-20 0 380 280">
             <!-- Ring centered at 170,140, r=102 -->
             <circle class="loop-ring" cx="170" cy="140" r="102" />
 
@@ -1812,7 +1838,7 @@
             <!-- Refine: dot at 272,140 → label starts at 284,140 (12px right of dot + matching visual gap) -->
             <text class="loop-label loop-label-distill" x="286" y="142">Distill</text>
             <!-- Steer: dot at 68,140 → label ends at 54,140 (same gap left) -->
-            <text class="loop-label loop-label-steer" x="54" y="142">Execute</text>
+            <text class="loop-label loop-label-steer" x="44" y="142">Execute</text>
 
             <!-- Dots on the ring -->
             <circle class="loop-dot loop-dot-discover" cx="170" cy="38" r="4.5" fill="var(--color-accent)" />
@@ -2065,10 +2091,38 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Nav scroll effect
+  // Nav scroll effect — hide on scroll down, show on scroll up
   const nav = document.getElementById('nav');
+  let lastScrollY = window.scrollY;
+  let scrollThreshold = 5;
+
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
+    const currentScrollY = window.scrollY;
+    
+    // Add background when scrolled past hero
+    nav.classList.toggle('scrolled', currentScrollY > 60);
+    
+    // At the top of the page, always show
+    if (currentScrollY <= 60) {
+      nav.classList.remove('nav-hidden');
+      nav.classList.remove('nav-visible');
+      lastScrollY = currentScrollY;
+      return;
+    }
+    
+    const delta = currentScrollY - lastScrollY;
+    
+    if (delta > scrollThreshold) {
+      // Scrolling down — hide nav
+      nav.classList.add('nav-hidden');
+      nav.classList.remove('nav-visible');
+    } else if (delta < -scrollThreshold) {
+      // Scrolling up — show nav with opaque background
+      nav.classList.remove('nav-hidden');
+      nav.classList.add('nav-visible');
+    }
+    
+    lastScrollY = currentScrollY;
   });
 
   // Reveal on scroll — content visible by default, animation is progressive enhancement
@@ -2085,9 +2139,10 @@
     reveals.forEach(el => observer.observe(el));
   }
 
-  // ARCS loop animation trigger
+  // EDGE loop animation trigger
   const framework = document.querySelector('.framework');
   if (framework) {
+    framework.classList.add('will-animate');
     const frameworkObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -2095,7 +2150,7 @@
           frameworkObserver.unobserve(framework);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2 });
     frameworkObserver.observe(framework);
   }
 
