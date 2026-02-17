@@ -982,6 +982,164 @@
     margin-bottom: 0;
   }
 
+  /* ============ CINEMATOGRAPHY CV CARDS ============ */
+  .credits-expand-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s ease;
+    margin-top: 0;
+  }
+
+  .credits-expand-section.open {
+    max-height: 3000px;
+    margin-top: 48px;
+  }
+
+  .credit-card {
+    display: flex;
+    gap: 0;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .credit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
+  .credit-card + .credit-card {
+    margin-top: 20px;
+  }
+
+  .credit-card-image {
+    width: 280px;
+    min-height: 200px;
+    flex-shrink: 0;
+    background: var(--color-bg-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .credit-card-image .image-placeholder-label {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--color-text-light);
+    opacity: 0.4;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .credit-card-details {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .credit-card-role {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+
+  .credit-card-details h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  .credit-card-meta {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    margin-bottom: 12px;
+  }
+
+  .credit-card-details p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  .credit-card-awards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .award-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: rgba(139, 105, 20, 0.08);
+    border: 1px solid rgba(139, 105, 20, 0.2);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+
+  .credits-view-all {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 768px) {
+    .credit-card {
+      flex-direction: column;
+    }
+
+    .credit-card-image {
+      width: 100%;
+      min-height: 180px;
+    }
+
+    .credit-card-details {
+      padding: 24px;
+    }
+
+    .credit-card-details h3 {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .credit-card-image {
+      min-height: 140px;
+    }
+
+    .credit-card-details {
+      padding: 20px;
+    }
+
+    .credit-card-details h3 {
+      font-size: 1rem;
+    }
+
+    .credit-card-details p {
+      font-size: 0.85rem;
+    }
+
+    .award-badge {
+      font-size: 0.62rem;
+      padding: 3px 8px;
+    }
+  }
+
   /* ============ EXPANDABLE WORK CARDS ============ */
   .work-card.expandable {
     cursor: pointer;
@@ -2084,6 +2242,75 @@
       <div class="foundation-buttons">
         <a href="#" class="btn btn-accent" onclick="openReel(); return false;">View Cinematography Reel →</a>
         <a href="https://imdb.com/name/nm2629267" class="btn btn-accent" target="_blank">View IMDb Credits →</a>
+        <a href="#" class="btn btn-dark" onclick="toggleCredits(); return false;" id="creditsToggleBtn">View Credits ↓</a>
+      </div>
+    </div>
+
+    <div class="credits-expand-section" id="creditsExpand">
+      <div class="credit-card" data-project="tlou2">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">The Last of Us Part II</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Performance Capture Video Lead</div>
+          <h3>The Last of Us Part II</h3>
+          <div class="credit-card-meta">Naughty Dog · Sony Interactive Entertainment · 2020</div>
+          <p>Led performance capture video on one of the most critically acclaimed games in history, working with director Neil Druckmann to capture the performances that redefined interactive storytelling.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">326 Game of the Year Awards</span>
+            <span class="award-badge">7 Wins — The Game Awards</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit-card" data-project="gow">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">God of War</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Performance Capture Video Lead</div>
+          <h3>God of War</h3>
+          <div class="credit-card-meta">Santa Monica Studio · Sony Interactive Entertainment · 2018</div>
+          <p>Led video capture on the franchise's genre-redefining entry, working alongside director Cory Barlog to translate raw motion capture performances into cinematic sequences.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">Game of the Year — The Game Awards</span>
+            <span class="award-badge">BAFTA · DICE · GDC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit-card" data-project="cya">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">Carne y Arena</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Performance Capture Video Lead</div>
+          <h3>Carne y Arena</h3>
+          <div class="credit-card-meta">Directed by Alejandro González Iñárritu · 2017</div>
+          <p>Contributed performance capture video to Iñárritu's groundbreaking virtual reality installation — the first VR work ever presented at the Cannes Film Festival.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">Special Achievement Academy Award</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit-card" data-project="counterpart">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">Counterpart</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Camera Operator / Title Sequence DP</div>
+          <h3>Counterpart</h3>
+          <div class="credit-card-meta">Created by Justin Marks · Starz · 2017–2019</div>
+          <p>Operated camera across the espionage thriller and served as Director of Photography on the main title sequence — the Emmy-winning titles that set the visual tone for J.K. Simmons' acclaimed dual performance.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">Emmy — Best Main Title Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credits-view-all">
+        <a href="cv.html" class="btn btn-accent">View Full Cinematography CV →</a>
       </div>
     </div>
   </div>
@@ -2236,6 +2463,19 @@
   function toggleCard(cardId) {
     const card = document.getElementById(cardId);
     card.classList.toggle('expanded');
+  }
+
+  // Cinematography credits expand
+  function toggleCredits() {
+    const section = document.getElementById('creditsExpand');
+    const btn = document.getElementById('creditsToggleBtn');
+    const isOpen = section.classList.toggle('open');
+    btn.textContent = isOpen ? 'Hide Credits \u2191' : 'View Credits \u2193';
+    if (isOpen) {
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
   }
 
   function switchVideo(project, videoId, title, btn) {
