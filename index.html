@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
+<script>document.documentElement.classList.remove('no-js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light only">
 <title>Jonathan Bruno — Creative Director & Video Production Leader</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A1A1A'/%3E%3Ctext x='3' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' fill='%238B6914'%3EJB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -1577,12 +1579,23 @@
   }
 
   .reveal {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: none;
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
   .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* JS will add this class for animation when observer works */
+  .reveal.will-animate {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .reveal.will-animate.visible {
     opacity: 1;
     transform: translateY(0);
   }
@@ -1606,7 +1619,7 @@
     .story-section .pullquote { font-size: 1.2rem; padding-left: 20px; }
     .story-section p { font-size: 1rem; line-height: 1.85; }
 
-    /* OODA Loop */
+    /* ARCS Loop */
     .framework { padding: 28px 20px; margin: 32px 0; }
     .framework-title { font-size: 0.72rem; letter-spacing: 0.1em; margin-bottom: 20px; }
     .framework-loop { flex-direction: column; gap: 28px; }
@@ -1687,7 +1700,7 @@
 
     .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
 
-    /* OODA tighter on small phones */
+    /* ARCS tighter on small phones */
     .framework { padding: 24px 16px; }
     .framework-circle { width: 180px; height: 180px; }
     .framework-desc-item { grid-template-columns: 72px 1fr; }
@@ -1784,7 +1797,7 @@
     <p>That work crystallized into a repeatable process — a decision loop I've run on every project since:</p>
 
     <div class="framework">
-      <div class="framework-title">My Creative Development OODA Loop</div>
+      <div class="framework-title">The Creative EDGE — My Development Framework</div>
       <div class="framework-loop">
         <div class="framework-circle">
           <svg viewBox="0 0 340 280">
@@ -1792,14 +1805,14 @@
             <circle class="loop-ring" cx="170" cy="140" r="102" />
 
             <!-- Labels - all 20px from their dot -->
-            <!-- Discover: dot at 170,38 → label at 170,18 (20px above) -->
-            <text class="loop-label loop-label-discover" x="170" y="16">Discover</text>
-            <!-- Build: dot at 170,242 → label at 170,264 (22px below) -->
-            <text class="loop-label loop-label-build" x="170" y="266">Build</text>
-            <!-- Distill: dot at 272,140 → label starts at 284,140 (12px right of dot + matching visual gap) -->
+            <!-- Analyze: dot at 170,38 → label at 170,18 (20px above) -->
+            <text class="loop-label loop-label-discover" x="170" y="16">Examine</text>
+            <!-- Craft: dot at 170,242 → label at 170,264 (22px below) -->
+            <text class="loop-label loop-label-build" x="170" y="266">Generate</text>
+            <!-- Refine: dot at 272,140 → label starts at 284,140 (12px right of dot + matching visual gap) -->
             <text class="loop-label loop-label-distill" x="286" y="142">Distill</text>
             <!-- Steer: dot at 68,140 → label ends at 54,140 (same gap left) -->
-            <text class="loop-label loop-label-steer" x="54" y="142">Steer</text>
+            <text class="loop-label loop-label-steer" x="54" y="142">Execute</text>
 
             <!-- Dots on the ring -->
             <circle class="loop-dot loop-dot-discover" cx="170" cy="38" r="4.5" fill="var(--color-accent)" />
@@ -1810,8 +1823,8 @@
         </div>
         <div class="framework-descriptions">
           <div class="framework-desc-item">
-            <strong>Discover</strong>
-            <span>Research the initiative. Understand the real business need.</span>
+            <strong>Examine</strong>
+            <span>Study the landscape — the business, the audience, the real need behind the ask.</span>
           </div>
           <div class="framework-desc-divider"></div>
           <div class="framework-desc-item">
@@ -1820,19 +1833,19 @@
           </div>
           <div class="framework-desc-divider"></div>
           <div class="framework-desc-item">
-            <strong>Build</strong>
+            <strong>Generate</strong>
             <span>Create pitches, mockups, and pre-visualizations to sell in the idea.</span>
           </div>
           <div class="framework-desc-divider"></div>
           <div class="framework-desc-item">
-            <strong>Steer</strong>
-            <span>Determine internal vs. vendor execution, aligning vision with resources and bandwidth.</span>
+            <strong>Execute</strong>
+            <span>Ship it — internal or vendor — measure, adjust, and loop back.</span>
           </div>
         </div>
       </div>
     </div>
 
-    <p>Then in 2023, the world changed and LLMs entered the modern vernacular. Suddenly, everything we were building had to stay internal and move fast. I applied the same model — discover, distill, build — but now focused on learning the technology itself, understanding the business vision behind each product, and translating it into clear, concise language for leadership at the highest levels of the company. Through the process of building sell-in content, our team found ourselves informing product design presentations. Thinking through how an application would show up in the real world forced design teams to confront new ideas, usability standards, and ethical considerations they hadn't yet addressed.</p>
+    <p>Then in 2023, the world changed and LLMs entered the modern vernacular. Suddenly, everything we were building had to stay internal and move fast. I applied the same model — examine, distill, generate — but now focused on learning the technology itself, understanding the business vision behind each product, and translating it into clear, concise language for leadership at the highest levels of the company. Through the process of building sell-in content, our team found ourselves informing product design presentations. Thinking through how an application would show up in the real world forced design teams to confront new ideas, usability standards, and ethical considerations they hadn't yet addressed.</p>
 
     <p class="pullquote">By the end, our creative team had become something rare inside Apple: a brand agency, strategic consultancy, and production house — all in one.</p>
 
@@ -1840,7 +1853,7 @@
 
     <p class="section-opener">I lead teams now. I form strategy. I help execute the vision.</p>
 
-    <p>My career taught me how to see — literally, through a lens — and that foundation gives me something most creative directors don't have: I understand the craft at a molecular level. But what I want to build is bigger than any single frame. Discover the need. Distill the strategy. Build the creative. Ship it. Repeat.</p>
+    <p>My career taught me how to see — literally, through a lens — and that foundation gives me something most creative directors don't have: I understand the craft at a molecular level. But what I want to build is bigger than any single frame. Examine the need. Distill the strategy. Generate the creative. Execute it well. Repeat.</p>
 
     <p>I'm looking for a team and a mission worth that effort.</p>
   </div>
@@ -2005,7 +2018,7 @@
     <p class="contact-subtitle">Creative Director & Video Production Leader · Bay Area, CA</p>
 
     <div class="contact-info">
-      <a href="mailto:jbrunofilm@icloud.com">jbrunofilm@icloud.com</a>
+      <a href="/cdn-cgi/l/email-protection#600a0212150e0f06090c0d2009030c0f15044e030f0d"><span class="__cf_email__" data-cfemail="a0cac2d2d5cecfc6c9cccde0c9c3cccfd5c48ec3cfcd">[email&#160;protected]</span></a>
       <a href="tel:+13108809268">310.880.9268</a>
     </div>
 
@@ -2051,26 +2064,28 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Reveal on scroll
+  // Reveal on scroll — content visible by default, animation is progressive enhancement
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
+  if ('IntersectionObserver' in window) {
+    reveals.forEach(el => el.classList.add('will-animate'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  }
 
-  reveals.forEach(el => observer.observe(el));
-
-  // OODA loop animation trigger
+  // ARCS loop animation trigger
   const framework = document.querySelector('.framework');
   if (framework) {
     const frameworkObserver = new IntersectionObserver((entries) => {
@@ -2251,11 +2266,4 @@
   });
 
   reduceMotion.addEventListener('change', () => {
-    document.body.classList.toggle('reduce-motion', reduceMotion.checked);
-    document.documentElement.style.scrollBehavior = reduceMotion.checked ? 'auto' : 'smooth';
-    localStorage.setItem('a11y-reduce-motion', reduceMotion.checked);
-  });
-</script>
-
-</body>
-</html>
+    document.body.classLi
