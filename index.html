@@ -580,20 +580,40 @@
     display: none;
   }
 
-  /* Descriptions fade in after circle completes */
-  .framework-descriptions {
+  /* Description items — eyelid reveal one by one after nodes land */
+  .framework-desc-item,
+  .framework-desc-divider {
     opacity: 1;
-    transform: none;
+    clip-path: inset(0 0);
     transition: none;
   }
 
-  .framework.will-animate .framework-descriptions {
+  .framework.will-animate .framework-desc-item,
+  .framework.will-animate .framework-desc-divider {
     opacity: 0;
-    transform: translateY(16px);
+    clip-path: inset(50% 0);
   }
 
-  .framework.animated .framework-descriptions {
-    animation: descFadeIn 0.8s ease 3.2s forwards;
+  .framework.animated .framework-descriptions > :nth-child(1) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.4s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(2) {
+    animation: dividerReveal 0.35s ease 3.85s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(3) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 4.0s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(4) {
+    animation: dividerReveal 0.35s ease 4.45s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(5) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 4.6s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(6) {
+    animation: dividerReveal 0.35s ease 5.05s forwards;
+  }
+  .framework.animated .framework-descriptions > :nth-child(7) {
+    animation: eyelidReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 5.2s forwards;
   }
 
   /* Title */
@@ -618,8 +638,14 @@
     to { opacity: 1; }
   }
 
-  @keyframes descFadeIn {
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes eyelidReveal {
+    from { clip-path: inset(50% 0); opacity: 0; }
+    to   { clip-path: inset(0% 0);  opacity: 1; }
+  }
+
+  @keyframes dividerReveal {
+    from { clip-path: inset(50% 0); opacity: 0; }
+    to   { clip-path: inset(0% 0);  opacity: 0.5; }
   }
 
   /* Reduced motion override */
@@ -627,11 +653,13 @@
   body.reduce-motion .framework .loop-label,
   body.reduce-motion .framework .loop-dot,
   body.reduce-motion .framework .framework-title,
-  body.reduce-motion .framework .framework-descriptions {
+  body.reduce-motion .framework .framework-desc-item,
+  body.reduce-motion .framework .framework-desc-divider {
     animation: none !important;
     opacity: 1 !important;
     stroke-dashoffset: 0 !important;
     transform: none !important;
+    clip-path: none !important;
   }
 
   .framework-circle .loop-fiber-1,
@@ -952,6 +980,164 @@
     grid-column: 1 / -1;
     margin-top: 36px;
     margin-bottom: 0;
+  }
+
+  /* ============ CINEMATOGRAPHY CV CARDS ============ */
+  .credits-expand-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s ease;
+    margin-top: 0;
+  }
+
+  .credits-expand-section.open {
+    max-height: 3000px;
+    margin-top: 48px;
+  }
+
+  .credit-card {
+    display: flex;
+    gap: 0;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .credit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
+  .credit-card + .credit-card {
+    margin-top: 20px;
+  }
+
+  .credit-card-image {
+    width: 280px;
+    min-height: 200px;
+    flex-shrink: 0;
+    background: var(--color-bg-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .credit-card-image .image-placeholder-label {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--color-text-light);
+    opacity: 0.4;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .credit-card-details {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .credit-card-role {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+
+  .credit-card-details h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  .credit-card-meta {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    margin-bottom: 12px;
+  }
+
+  .credit-card-details p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  .credit-card-awards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .award-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: rgba(139, 105, 20, 0.08);
+    border: 1px solid rgba(139, 105, 20, 0.2);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+
+  .credits-view-all {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 768px) {
+    .credit-card {
+      flex-direction: column;
+    }
+
+    .credit-card-image {
+      width: 100%;
+      min-height: 180px;
+    }
+
+    .credit-card-details {
+      padding: 24px;
+    }
+
+    .credit-card-details h3 {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .credit-card-image {
+      min-height: 140px;
+    }
+
+    .credit-card-details {
+      padding: 20px;
+    }
+
+    .credit-card-details h3 {
+      font-size: 1rem;
+    }
+
+    .credit-card-details p {
+      font-size: 0.85rem;
+    }
+
+    .award-badge {
+      font-size: 0.62rem;
+      padding: 3px 8px;
+    }
   }
 
   /* ============ EXPANDABLE WORK CARDS ============ */
@@ -1598,7 +1784,13 @@
     }
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
+      animation-delay: 0ms !important;
       transition-duration: 0.001ms !important;
+    }
+    .framework.will-animate .framework-desc-item,
+    .framework.will-animate .framework-desc-divider {
+      clip-path: none !important;
+      opacity: 1 !important;
     }
   }
 
@@ -1821,7 +2013,9 @@
     <div class="section-label">The Through Line</div>
     <div class="section-title">I didn't plan to become a creative director.<br>I planned to make movies.</div>
 
-    <p class="section-opener">So I moved to Los Angeles. After earning my BFA in Cinematography from Chapman University — where I was awarded both the Eastman Kodak and Panavision grants — I spent the next decade behind the camera. I shot indie features and national commercials for brands like L'Oreal Paris, Warner Bros, and Sony Pictures. I operated A-camera on <em>Bone Tomahawk</em> alongside my childhood hero, Kurt Russell, shot the title sequence and operated camera on Justin Marks and Morten Tyldum's espionage thriller <em>Counterpart</em> for Starz, and worked second unit on Netflix's <em>Love</em>. My curiosity kept pulling me into unfamiliar rooms — performance capture stages for <em>God of War</em> and <em>Uncharted 4</em>, Alejandro González Iñárritu's VR installation <em>Carne Y Arena</em>, experimental projects at Uber. I wasn't chasing a title. I was chasing the work.</p>
+    <p class="section-opener">I grew up in Colorado. The landscape teaches you to pay attention before it teaches you anything else. Morning light breaking across the Front Range, the stillness of a trailhead before dawn, the way a thunderstorm announces itself with a thick smell on the wind twenty minutes before it appears. That landscape trained my eye long before I picked up a camera. It built an instinct for observation, for patience, for reading what's actually in front of you before deciding what to do with it.</p>
+
+    <p>So I moved to Los Angeles. The pace changed. Everything got louder, faster, more competitive. But I carried that Colorado stillness with me. It showed up in how I composed a frame, how I read a room, how I found the story inside the noise. After earning my BFA in Cinematography from Chapman University — where I was awarded both the Eastman Kodak and Panavision grants — I spent the next decade behind the camera. I shot indie features and national commercials for brands like L'Oreal Paris, Warner Bros, and Sony Pictures. I operated A-camera on <em>Bone Tomahawk</em> alongside my childhood hero, Kurt Russell, shot the title sequence and operated camera on Justin Marks and Morten Tyldum's espionage thriller <em>Counterpart</em> for Starz, and worked second unit on Netflix's <em>Love</em>. My curiosity kept pulling me into unfamiliar rooms — performance capture stages for <em>God of War</em> and <em>Uncharted 4</em>, Alejandro González Iñárritu's VR installation <em>Carne Y Arena</em>, experimental projects at Uber. I wasn't chasing a title. I was chasing the work.</p>
 
     <p>What I didn't realize at the time was that every new room was teaching me something beyond the camera. I was learning how to walk into a world I didn't fully understand, earn trust quickly, and deliver. That instinct — show up, learn the language, solve the problem — is what eventually carried me from set to strategy.</p>
 
@@ -2048,6 +2242,75 @@
       <div class="foundation-buttons">
         <a href="#" class="btn btn-accent" onclick="openReel(); return false;">View Cinematography Reel →</a>
         <a href="https://imdb.com/name/nm2629267" class="btn btn-accent" target="_blank">View IMDb Credits →</a>
+        <a href="#" class="btn btn-dark" onclick="toggleCredits(); return false;" id="creditsToggleBtn">View Credits ↓</a>
+      </div>
+    </div>
+
+    <div class="credits-expand-section" id="creditsExpand">
+      <div class="credit-card" data-project="tlou2">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">The Last of Us Part II</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Performance Capture Video Lead</div>
+          <h3>The Last of Us Part II</h3>
+          <div class="credit-card-meta">Naughty Dog · Sony Interactive Entertainment · 2020</div>
+          <p>Led performance capture video on one of the most critically acclaimed games in history, working with director Neil Druckmann to capture the performances that redefined interactive storytelling.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">326 Game of the Year Awards</span>
+            <span class="award-badge">7 Wins — The Game Awards</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit-card" data-project="gow">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">God of War</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Performance Capture Video Lead</div>
+          <h3>God of War</h3>
+          <div class="credit-card-meta">Santa Monica Studio · Sony Interactive Entertainment · 2018</div>
+          <p>Led video capture on the franchise's genre-redefining entry, working alongside director Cory Barlog to translate raw motion capture performances into cinematic sequences.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">Game of the Year — The Game Awards</span>
+            <span class="award-badge">BAFTA · DICE · GDC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit-card" data-project="cya">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">Carne y Arena</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Performance Capture Video Lead</div>
+          <h3>Carne y Arena</h3>
+          <div class="credit-card-meta">Directed by Alejandro González Iñárritu · 2017</div>
+          <p>Contributed performance capture video to Iñárritu's groundbreaking virtual reality installation — the first VR work ever presented at the Cannes Film Festival.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">Special Achievement Academy Award</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit-card" data-project="counterpart">
+        <div class="credit-card-image">
+          <span class="image-placeholder-label">Counterpart</span>
+        </div>
+        <div class="credit-card-details">
+          <div class="credit-card-role">Camera Operator / Title Sequence DP</div>
+          <h3>Counterpart</h3>
+          <div class="credit-card-meta">Created by Justin Marks · Starz · 2017–2019</div>
+          <p>Operated camera across the espionage thriller and served as Director of Photography on the main title sequence — the Emmy-winning titles that set the visual tone for J.K. Simmons' acclaimed dual performance.</p>
+          <div class="credit-card-awards">
+            <span class="award-badge">Emmy — Best Main Title Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="credits-view-all">
+        <a href="cv.html" class="btn btn-accent">View Full Cinematography CV →</a>
       </div>
     </div>
   </div>
@@ -2061,7 +2324,7 @@
     <p class="contact-subtitle">Creative Director & Video Production Leader · Bay Area, CA</p>
 
     <div class="contact-info">
-      <a href="/cdn-cgi/l/email-protection#600a0212150e0f06090c0d2009030c0f15044e030f0d"><span class="__cf_email__" data-cfemail="a0cac2d2d5cecfc6c9cccde0c9c3cccfd5c48ec3cfcd">[email&#160;protected]</span></a>
+      <a href="mailto:jbrunofilm@icloud.com">jbrunofilm@icloud.com</a>
       <a href="tel:+13108809268">310.880.9268</a>
     </div>
 
@@ -2202,6 +2465,19 @@
     card.classList.toggle('expanded');
   }
 
+  // Cinematography credits expand
+  function toggleCredits() {
+    const section = document.getElementById('creditsExpand');
+    const btn = document.getElementById('creditsToggleBtn');
+    const isOpen = section.classList.toggle('open');
+    btn.textContent = isOpen ? 'Hide Credits \u2191' : 'View Credits \u2193';
+    if (isOpen) {
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
+
   function switchVideo(project, videoId, title, btn) {
     const player = document.getElementById(project + '-player');
     const titleEl = document.getElementById(project + '-title');
@@ -2310,4 +2586,10 @@
   });
 
   reduceMotion.addEventListener('change', () => {
-    document.body.classLi
+    document.body.classList.toggle('reduce-motion', reduceMotion.checked);
+    document.documentElement.style.scrollBehavior = reduceMotion.checked ? 'auto' : '';
+    localStorage.setItem('a11y-reduce-motion', reduceMotion.checked);
+  });
+</script>
+</body>
+</html>

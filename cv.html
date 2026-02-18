@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinematography Credits — Jonathan Bruno</title>
+<meta property="og:title" content="Cinematography Credits — Jonathan Bruno">
+<meta property="og:description" content="A decade behind the camera — feature films, AAA game cinematics, VR experiences, and national commercials.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A1A1A'/%3E%3Ctext x='3' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' fill='%238B6914'%3EJB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --color-bg: #F7F5F2;
+    --color-bg-warm: #EFEAE4;
+    --color-bg-dark: #1A1A1A;
+    --color-text: #1A1A1A;
+    --color-text-secondary: #3D3A36;
+    --color-text-light: #6B665F;
+    --color-text-on-dark: #F7F5F2;
+    --color-accent: #8B6914;
+    --color-accent-muted: #D4A843;
+    --color-accent-decorative: #B8860B;
+    --color-border: #D6D0C8;
+    --color-card: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --max-width: 860px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--color-accent-muted);
+    color: var(--color-bg);
+  }
+
+  /* ============ CV PAGE LAYOUT ============ */
+  .cv-page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 40px 60px;
+  }
+
+  .cv-back {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin-bottom: 48px;
+  }
+
+  .cv-back:hover {
+    color: var(--color-accent);
+  }
+
+  .cv-header {
+    margin-bottom: 56px;
+  }
+
+  .cv-header .section-label {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+
+  .cv-header .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin-bottom: 20px;
+  }
+
+  .cv-intro {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* ============ CREDIT CARDS ============ */
+  .credit-card {
+    display: flex;
+    gap: 0;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .credit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
+  .credit-card + .credit-card {
+    margin-top: 20px;
+  }
+
+  .credit-card-image {
+    width: 280px;
+    min-height: 200px;
+    flex-shrink: 0;
+    background: var(--color-bg-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .credit-card-image .image-placeholder-label {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--color-text-light);
+    opacity: 0.4;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .credit-card-details {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .credit-card-role {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+
+  .credit-card-details h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  .credit-card-meta {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    margin-bottom: 12px;
+  }
+
+  .credit-card-details p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  .credit-card-awards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .award-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: rgba(139, 105, 20, 0.08);
+    border: 1px solid rgba(139, 105, 20, 0.2);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+
+  /* ============ SECTION DIVIDER ============ */
+  .cv-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    margin: 56px 0;
+  }
+
+  .cv-tier-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-bottom: 24px;
+  }
+
+  /* ============ FOOTER ============ */
+  .cv-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cv-footer-copy {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .cv-page {
+      padding: 60px 24px 40px;
+    }
+
+    .credit-card {
+      flex-direction: column;
+    }
+
+    .credit-card-image {
+      width: 100%;
+      min-height: 180px;
+    }
+
+    .credit-card-details {
+      padding: 24px;
+    }
+
+    .credit-card-details h3 {
+      font-size: 1.1rem;
+    }
+
+    .cv-footer {
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cv-page {
+      padding: 40px 24px 32px;
+    }
+
+    .credit-card-image {
+      min-height: 140px;
+    }
+
+    .credit-card-details {
+      padding: 20px;
+    }
+
+    .credit-card-details h3 {
+      font-size: 1rem;
+    }
+
+    .credit-card-details p {
+      font-size: 0.85rem;
+    }
+
+    .award-badge {
+      font-size: 0.62rem;
+      padding: 3px 8px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="cv-page">
+  <a href="index.html#foundation" class="cv-back">&larr; Back to Portfolio</a>
+
+  <header class="cv-header">
+    <div class="section-label">Cinematography & Filmmaking</div>
+    <h1 class="section-title">Cinematography Credits</h1>
+    <p class="cv-intro">A decade behind the camera — on feature films, AAA game cinematics, VR experiences, and national commercials. This is where I learned to see, and it's the foundation everything else is built on.</p>
+  </header>
+
+  <main>
+    <div class="credit-card" data-project="tlou2">
+      <div class="credit-card-image">
+        <span class="image-placeholder-label">The Last of Us Part II</span>
+      </div>
+      <div class="credit-card-details">
+        <div class="credit-card-role">Performance Capture Video Lead</div>
+        <h3>The Last of Us Part II</h3>
+        <div class="credit-card-meta">Naughty Dog · Sony Interactive Entertainment · 2020</div>
+        <p>Led performance capture video on one of the most critically acclaimed games in history, working with director Neil Druckmann to capture the performances that redefined interactive storytelling.</p>
+        <div class="credit-card-awards">
+          <span class="award-badge">326 Game of the Year Awards</span>
+          <span class="award-badge">7 Wins — The Game Awards</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-card" data-project="gow">
+      <div class="credit-card-image">
+        <span class="image-placeholder-label">God of War</span>
+      </div>
+      <div class="credit-card-details">
+        <div class="credit-card-role">Performance Capture Video Lead</div>
+        <h3>God of War</h3>
+        <div class="credit-card-meta">Santa Monica Studio · Sony Interactive Entertainment · 2018</div>
+        <p>Led video capture on the franchise's genre-redefining entry, working alongside director Cory Barlog to translate raw motion capture performances into cinematic sequences.</p>
+        <div class="credit-card-awards">
+          <span class="award-badge">Game of the Year — The Game Awards</span>
+          <span class="award-badge">BAFTA · DICE · GDC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-card" data-project="uncharted4">
+      <div class="credit-card-image">
+        <span class="image-placeholder-label">Uncharted 4: A Thief's End</span>
+      </div>
+      <div class="credit-card-details">
+        <div class="credit-card-role">Performance Capture Video Lead</div>
+        <h3>Uncharted 4: A Thief's End</h3>
+        <div class="credit-card-meta">Naughty Dog · Sony Interactive Entertainment · 2016</div>
+        <p>Led performance capture video on the franchise's critically acclaimed conclusion, helping translate Naughty Dog's signature cinematic ambition into the most awarded game of 2016.</p>
+        <div class="credit-card-awards">
+          <span class="award-badge">Game of the Year — BAFTA</span>
+          <span class="award-badge">Game of the Year — SXSW</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-card" data-project="cya">
+      <div class="credit-card-image">
+        <span class="image-placeholder-label">Carne y Arena</span>
+      </div>
+      <div class="credit-card-details">
+        <div class="credit-card-role">Performance Capture Video Lead</div>
+        <h3>Carne y Arena</h3>
+        <div class="credit-card-meta">Directed by Alejandro González Iñárritu · 2017</div>
+        <p>Contributed performance capture video to Iñárritu's groundbreaking virtual reality installation — the first VR work ever presented at the Cannes Film Festival.</p>
+        <div class="credit-card-awards">
+          <span class="award-badge">Special Achievement Academy Award</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-card" data-project="counterpart">
+      <div class="credit-card-image">
+        <span class="image-placeholder-label">Counterpart</span>
+      </div>
+      <div class="credit-card-details">
+        <div class="credit-card-role">Camera Operator / Title Sequence DP</div>
+        <h3>Counterpart</h3>
+        <div class="credit-card-meta">Created by Justin Marks · Starz · 2017–2019</div>
+        <p>Operated camera across the espionage thriller and served as Director of Photography on the main title sequence — the Emmy-winning titles that set the visual tone for J.K. Simmons' acclaimed dual performance.</p>
+        <div class="credit-card-awards">
+          <span class="award-badge">Emmy — Best Main Title Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-card" data-project="bone-tomahawk">
+      <div class="credit-card-image">
+        <span class="image-placeholder-label">Bone Tomahawk</span>
+      </div>
+      <div class="credit-card-details">
+        <div class="credit-card-role">A Camera Operator</div>
+        <h3>Bone Tomahawk</h3>
+        <div class="credit-card-meta">Directed by S. Craig Zahler · 2015</div>
+        <p>Operated A-camera on Zahler's debut feature — a genre-defying horror-western starring Kurt Russell that has since become a cult classic.</p>
+        <div class="credit-card-awards">
+          <span class="award-badge">Saturn Award Nominee</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-card" data-project="love">
+      <div class="credit-card-image">
+        <span class="image-placeholder-label">Love</span>
+      </div>
+      <div class="credit-card-details">
+        <div class="credit-card-role">2nd Unit Director of Photography</div>
+        <h3>Love — Season 2</h3>
+        <div class="credit-card-meta">Created by Judd Apatow · Netflix · 2017</div>
+        <p>Shot second unit on the acclaimed romantic comedy series, bringing cinematic texture to Apatow's signature naturalistic storytelling.</p>
+        <div class="credit-card-awards">
+          <span class="award-badge">94% Rotten Tomatoes</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="cv-footer">
+    <a href="index.html#foundation" class="cv-back">&larr; Back to Portfolio</a>
+    <span class="cv-footer-copy">&copy; 2026 Jonathan Bruno</span>
+  </div>
+</div>
+
+</body>
+</html>
