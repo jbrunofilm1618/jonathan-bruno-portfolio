@@ -1530,9 +1530,14 @@
     background: none;
     border: none;
     color: rgba(247, 245, 242, 0.3);
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     cursor: pointer;
-    padding: 8px;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: color 0.2s ease;
     touch-action: manipulation;
   }
@@ -2647,18 +2652,28 @@
   const bannerBody = emdashBanner.querySelector('.emdash-banner-body');
   bannerBody.addEventListener('transitionend', updateNavPosition);
 
-  emdashHeader.addEventListener('click', (e) => {
-    if (e.target === emdashClose) return;
-    emdashBanner.classList.toggle('open');
-  });
-
-  emdashClose.addEventListener('click', (e) => {
+  // Toggle banner open/closed — direct handler on expand button
+  function toggleBanner(e) {
     e.stopPropagation();
+    e.preventDefault();
+    emdashBanner.classList.toggle('open');
+    setTimeout(updateNavPosition, 450);
+  }
+  emdashExpand.addEventListener('click', toggleBanner);
+
+  // Also allow tapping the title text to toggle
+  emdashBanner.querySelector('.emdash-banner-title').addEventListener('click', toggleBanner);
+
+  // Dismiss banner — direct handler on close button
+  function dismissBanner(e) {
+    e.stopPropagation();
+    e.preventDefault();
     emdashBanner.classList.add('dismissed');
     document.body.classList.add('banner-dismissed');
     nav.style.top = '';
     sessionStorage.setItem('emdash-dismissed', 'true');
-  });
+  }
+  emdashClose.addEventListener('click', dismissBanner);
 
   // Accessibility panel
   const a11yToggle = document.getElementById('a11yToggle');
@@ -2667,13 +2682,21 @@
   const largeText = document.getElementById('largeText');
   const reduceMotion = document.getElementById('reduceMotion');
 
+  // Track when the toggle was just tapped to prevent race conditions on mobile
+  let a11yJustToggled = false;
+
   a11yToggle.addEventListener('click', (e) => {
     e.stopPropagation();
+    e.preventDefault();
+    a11yJustToggled = true;
     a11yPanel.classList.toggle('open');
+    // Reset flag after current event cycle completes
+    setTimeout(() => { a11yJustToggled = false; }, 0);
   });
 
-  // Close panel when clicking outside
+  // Close panel when clicking outside — skip if toggle was just tapped
   document.addEventListener('click', (e) => {
+    if (a11yJustToggled) return;
     if (!a11yPanel.contains(e.target) && !a11yToggle.contains(e.target)) {
       a11yPanel.classList.remove('open');
     }
