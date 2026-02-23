@@ -95,6 +95,14 @@
     top: 0;
   }
 
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
+
+  body.mobile-menu-open nav {
+    z-index: 300;
+  }
+
   nav.scrolled {
     /* no override needed — frosted glass is always on */
   }
@@ -199,7 +207,7 @@
     border: none;
     cursor: pointer;
     padding: 4px;
-    z-index: 110;
+    z-index: 260;
   }
 
   .nav-hamburger span {
@@ -243,12 +251,12 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(247, 245, 242, 0.98);
+      background: var(--color-bg);
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 28px;
-      z-index: 105;
+      z-index: 250;
       padding: 0;
     }
 
@@ -1670,6 +1678,18 @@
     --color-card: #FFFFFF;
   }
 
+  body.high-contrast nav {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  body.high-contrast .apple-section p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  body.high-contrast .apple-stat .label {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
   /* ============ LARGE TEXT MODE ============ */
   body.large-text {
     font-size: 20px;
@@ -1762,12 +1782,33 @@
     font-size: 0.92rem;
   }
 
+  /* Large text + mobile adjustments */
+  @media (max-width: 768px) {
+    body.large-text .hero {
+      padding-top: 160px;
+    }
+    body.large-text .hero h1 {
+      font-size: clamp(2rem, 7vw, 2.8rem);
+    }
+    body.large-text .hero-sub {
+      font-size: 1.1rem;
+    }
+    body.large-text nav .nav-links a {
+      font-size: 1.1rem;
+    }
+  }
+
   /* ============ REDUCED MOTION ============ */
   body.reduce-motion *,
   body.reduce-motion *::before,
   body.reduce-motion *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+
+  body.reduce-motion .reveal.will-animate {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   body.reduce-motion {
@@ -1786,6 +1827,10 @@
       animation-duration: 0.001ms !important;
       animation-delay: 0ms !important;
       transition-duration: 0.001ms !important;
+    }
+    .reveal.will-animate {
+      opacity: 1 !important;
+      transform: none !important;
     }
     .framework.will-animate .framework-desc-item,
     .framework.will-animate .framework-desc-divider {
@@ -1843,7 +1888,7 @@
     nav .nav-links { gap: 20px; }
     nav .nav-links a { font-size: 0.72rem; }
 
-    .hero { padding: 120px 24px 80px; }
+    .hero { padding: 140px 24px 80px; }
     .hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-sub { font-size: 1rem; }
     section { padding: clamp(60px, 8vw, 100px) 24px; }
@@ -1913,12 +1958,14 @@
 
     .hero {
       min-height: auto;
-      padding: 100px 24px 60px;
+      padding: 140px 24px 60px;
     }
 
     .hero h1 { font-size: 2rem; }
     .hero-sub { font-size: 0.92rem; max-width: 100%; }
     .hero-label { font-size: 0.7rem; }
+
+    nav { padding: 14px 16px; }
 
     .apple-stats { flex-direction: column; gap: 24px; }
 
@@ -1946,6 +1993,10 @@
     .card-video-nav button { padding: 6px 10px; font-size: 0.75rem; }
 
     .emdash-banner-text { font-size: 0.78rem; }
+
+    /* Reel modal tighter on small phones */
+    .reel-modal { padding: 16px; }
+    .reel-modal-close { top: -36px; font-size: 1.2rem; }
   }
 </style>
 </head>
@@ -2379,6 +2430,27 @@
 
   // Reveal on scroll — content visible by default, animation is progressive enhancement
   const reveals = document.querySelectorAll('.reveal');
+
+  // Scroll-based fallback to guarantee reveals show on mobile
+  function checkReveals() {
+    reveals.forEach(el => {
+      if (el.classList.contains('visible')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
+  // Force all reveals visible (used when accessibility settings change)
+  function forceShowReveals() {
+    reveals.forEach(el => el.classList.add('visible'));
+    const fw = document.querySelector('.framework');
+    if (fw) {
+      fw.classList.add('animated');
+    }
+  }
+
   if ('IntersectionObserver' in window) {
     reveals.forEach(el => el.classList.add('will-animate'));
     const observer = new IntersectionObserver((entries) => {
@@ -2389,6 +2461,15 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
+
+    // Scroll fallback for mobile Safari reliability
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(checkReveals, 100);
+    }, { passive: true });
+    // Initial check after page settles
+    setTimeout(checkReveals, 500);
   }
 
   // EDGE loop animation trigger
@@ -2497,6 +2578,7 @@
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     navLinks.classList.toggle('mobile-open');
+    document.body.classList.toggle('mobile-menu-open');
   });
 
   // Close mobile menu on link click
@@ -2504,6 +2586,7 @@
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
       navLinks.classList.remove('mobile-open');
+      document.body.classList.remove('mobile-menu-open');
     });
   });
 
@@ -2561,34 +2644,45 @@
   });
 
   // Load saved preferences
+  let hasA11ySetting = false;
   if (localStorage.getItem('a11y-high-contrast') === 'true') {
     document.body.classList.add('high-contrast');
     highContrast.checked = true;
+    hasA11ySetting = true;
   }
   if (localStorage.getItem('a11y-large-text') === 'true') {
     document.body.classList.add('large-text');
     largeText.checked = true;
+    hasA11ySetting = true;
   }
   if (localStorage.getItem('a11y-reduce-motion') === 'true') {
     document.body.classList.add('reduce-motion');
     document.documentElement.style.scrollBehavior = 'auto';
     reduceMotion.checked = true;
+    hasA11ySetting = true;
+  }
+  // If any accessibility setting was active on load, ensure all content is visible
+  if (hasA11ySetting) {
+    forceShowReveals();
   }
 
   highContrast.addEventListener('change', () => {
     document.body.classList.toggle('high-contrast', highContrast.checked);
     localStorage.setItem('a11y-high-contrast', highContrast.checked);
+    forceShowReveals();
   });
 
   largeText.addEventListener('change', () => {
     document.body.classList.toggle('large-text', largeText.checked);
     localStorage.setItem('a11y-large-text', largeText.checked);
+    forceShowReveals();
   });
 
   reduceMotion.addEventListener('change', () => {
     document.body.classList.toggle('reduce-motion', reduceMotion.checked);
     document.documentElement.style.scrollBehavior = reduceMotion.checked ? 'auto' : '';
     localStorage.setItem('a11y-reduce-motion', reduceMotion.checked);
+    forceShowReveals();
   });
 </script>
 </body>
