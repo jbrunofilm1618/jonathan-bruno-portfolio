@@ -1922,22 +1922,22 @@
     .emdash-banner.open .emdash-banner-body { padding: 0 16px 14px; }
     .emdash-banner-text { font-size: 0.78rem; line-height: 1.55; }
 
-    .hero { padding: 140px 24px 80px; }
+    .hero { padding: 120px 24px 60px; }
     .hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-sub { font-size: 1rem; }
     section { padding: clamp(60px, 8vw, 100px) 24px; }
 
     /* Story */
     .story-section .section-opener { font-size: 1.05rem; }
-    .story-section .story-heading { font-size: 1.3rem; }
-    .story-section .pullquote { font-size: 1.2rem; padding-left: 20px; }
+    .story-section .story-heading { font-size: 1.3rem; margin-top: 48px; padding-top: 36px; }
+    .story-section .pullquote { font-size: 1.2rem; padding-left: 20px; margin: 36px 0; }
     .story-section p { font-size: 1rem; line-height: 1.85; }
 
     /* EDGE Loop */
     .framework { padding: 28px 20px; margin: 32px 0; }
     .framework-title { font-size: 0.72rem; letter-spacing: 0.1em; margin-bottom: 20px; }
     .framework-loop { flex-direction: column; gap: 28px; }
-    .framework-circle { width: 220px; height: 220px; }
+    .framework-circle { width: 200px; height: 200px; }
     .framework-descriptions { max-width: 100%; }
     .framework-desc-item { grid-template-columns: 80px 1fr; gap: 0 12px; padding: 14px 0; }
     .framework-desc-item strong { font-size: 0.95rem; }
@@ -1946,13 +1946,13 @@
 
     /* Work cards */
     .work-grid { grid-template-columns: 1fr; }
-    .work-card { padding: 28px 24px; }
+    .work-card { padding: 24px 20px; }
     .work-card h3 { font-size: 1.15rem; }
     .work-card p { font-size: 0.95rem; }
     .card-video-nav button { padding: 8px 12px; font-size: 0.78rem; }
 
     /* Apple section */
-    .apple-stats { gap: 32px; }
+    .apple-stats { flex-wrap: wrap; gap: 24px 32px; }
     .apple-stat .number { font-size: 2rem; }
     .apple-section p { font-size: 1rem; line-height: 1.85; }
 
@@ -1980,57 +1980,119 @@
     .contact-subtitle { font-size: 1rem; }
 
     /* Footer */
-    footer { padding: 24px; font-size: 0.82rem; }
+    footer { padding: 24px 16px; font-size: 0.82rem; }
 
     /* Accessibility panel */
     .a11y-toggle { bottom: 16px; right: 16px; }
     .a11y-panel { bottom: 72px; right: 16px; width: 240px; padding: 20px; }
+
+    /* Reel modal */
+    .reel-modal { padding: 20px; }
+    .reel-modal-close { top: -36px; font-size: 1.2rem; }
   }
 
   @media (max-width: 480px) {
-    html { font-size: 17px; }
+    html { font-size: 16px; }
+
+    nav { padding: 12px 16px; }
+    .nav-resume-btn-mobile { padding: 8px 14px; font-size: 0.7rem; }
 
     .hero {
       min-height: auto;
-      padding: 140px 24px 60px;
+      padding: 110px 16px 48px;
     }
-
-    .hero h1 { font-size: 2rem; }
+    .hero h1 { font-size: 1.85rem; }
     .hero-sub { font-size: 0.92rem; max-width: 100%; }
-    .hero-label { font-size: 0.7rem; }
+    .hero-label { font-size: 0.7rem; margin-bottom: 16px; }
+    .hero h1 { margin-bottom: 20px; }
+    .hero-line { margin-top: 32px; }
 
-    nav { padding: 14px 16px; }
+    section { padding: clamp(40px, 6vw, 60px) 16px; }
+    .section-title { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 32px; }
+    .section-label { font-size: 0.85rem; margin-bottom: 12px; }
 
-    .apple-stats { flex-direction: column; gap: 24px; }
+    /* Story */
+    .story-section .pullquote { font-size: 1.1rem; padding-left: 16px; margin: 28px 0; }
+    .story-section .story-heading { font-size: 1.2rem; margin-top: 40px; padding-top: 28px; }
+    .story-section p { font-size: 0.95rem; margin-bottom: 20px; }
 
+    /* EDGE Loop — tighter on small phones */
+    .framework { padding: 20px 14px; margin: 24px 0; }
+    .framework-circle { width: 160px; height: 160px; }
+    .framework-desc-item { grid-template-columns: 68px 1fr; gap: 0 8px; }
+    .framework-desc-item strong { font-size: 0.88rem; }
+    .framework-desc-item span { font-size: 0.82rem; }
+    .framework-descriptions { gap: 14px; }
+
+    /* Work cards */
+    .work-card { padding: 20px 16px; }
+    .work-card h3 { font-size: 1.05rem; }
+    .work-card p { font-size: 0.88rem; }
+    .card-video-nav { gap: 6px; }
+    .card-video-nav button { padding: 6px 10px; font-size: 0.75rem; }
+
+    /* Apple section */
+    .apple-stats { flex-direction: column; gap: 20px; }
+    .apple-stat .number { font-size: 1.8rem; }
+
+    /* Foundation / Credits */
     .credit-item {
       flex-direction: column;
       align-items: flex-start;
       gap: 2px;
     }
-
     .credit-item .credit-role {
       margin-left: 0;
       font-size: 0.82rem;
     }
+    .credits-and-buttons { gap: 8px 0; }
 
-    .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+    /* Credit cards */
+    .credit-card-details { padding: 16px; }
+    .credit-card-details h3 { font-size: 0.95rem; }
+    .credit-card-details p { font-size: 0.82rem; }
+    .credit-card-image { min-height: 120px; }
+    .award-badge { font-size: 0.6rem; padding: 3px 7px; }
 
-    /* EDGE tighter on small phones */
-    .framework { padding: 24px 16px; }
-    .framework-circle { width: 180px; height: 180px; }
-    .framework-desc-item { grid-template-columns: 72px 1fr; }
-    .framework-desc-item strong { font-size: 0.9rem; }
-    .framework-desc-item span { font-size: 0.85rem; }
+    /* Contact */
+    .contact-section { padding: 48px 16px; }
+    .contact-links { gap: 16px; }
 
-    .card-video-nav { gap: 6px; }
-    .card-video-nav button { padding: 6px 10px; font-size: 0.75rem; }
+    /* Em-dash banner */
+    .emdash-banner-header { padding: 8px 12px; }
+    .emdash-banner-body { padding: 0 12px; }
+    .emdash-banner.open .emdash-banner-body { padding: 0 12px 12px; }
+    .emdash-banner-text { font-size: 0.75rem; }
+    .emdash-banner-title { font-size: 0.78rem; }
 
-    .emdash-banner-text { font-size: 0.78rem; }
+    /* Footer */
+    footer { padding: 20px 16px; font-size: 0.75rem; }
+
+    /* Accessibility panel — fit on small screens */
+    .a11y-toggle { bottom: 12px; right: 12px; width: 40px; height: 40px; font-size: 1rem; }
+    .a11y-panel { bottom: 64px; right: 12px; left: 12px; width: auto; padding: 16px; }
 
     /* Reel modal tighter on small phones */
-    .reel-modal { padding: 16px; }
-    .reel-modal-close { top: -36px; font-size: 1.2rem; }
+    .reel-modal { padding: 12px; }
+    .reel-modal-close { top: -32px; font-size: 1.1rem; }
+  }
+
+  /* Tiny phones (320px) */
+  @media (max-width: 360px) {
+    .hero { padding: 100px 12px 40px; }
+    .hero h1 { font-size: 1.65rem; }
+    .hero-sub { font-size: 0.88rem; }
+    section { padding: clamp(32px, 5vw, 48px) 12px; }
+    nav { padding: 10px 12px; }
+    .framework-circle { width: 140px; height: 140px; }
+    .framework { padding: 16px 12px; }
+    .framework-desc-item { grid-template-columns: 60px 1fr; gap: 0 6px; }
+    .framework-desc-item strong { font-size: 0.82rem; }
+    .framework-desc-item span { font-size: 0.78rem; }
+    .work-card { padding: 16px 12px; }
+    .work-card h3 { font-size: 1rem; }
+    .contact-section { padding: 40px 12px; }
+    footer { padding: 16px 12px; }
   }
 </style>
 </head>
