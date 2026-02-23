@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q516M4SWC6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q516M4SWC6');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cinematography Credits — Jonathan Bruno</title>
@@ -239,8 +247,10 @@
   /* ============ RESPONSIVE ============ */
   @media (max-width: 768px) {
     .cv-page {
-      padding: 60px 24px 40px;
+      padding: 48px 24px 40px;
     }
+
+    .cv-header { margin-bottom: 40px; }
 
     .credit-card {
       flex-direction: column;
@@ -248,7 +258,7 @@
 
     .credit-card-image {
       width: 100%;
-      min-height: 180px;
+      min-height: 160px;
     }
 
     .credit-card-details {
@@ -264,33 +274,55 @@
       gap: 16px;
       align-items: flex-start;
     }
+
+    .cv-divider { margin: 40px 0; }
   }
 
   @media (max-width: 480px) {
     .cv-page {
-      padding: 40px 24px 32px;
+      padding: 36px 16px 28px;
     }
 
+    .cv-header { margin-bottom: 32px; }
+    .cv-back { margin-bottom: 32px; font-size: 0.78rem; }
+    .cv-intro { font-size: 0.95rem; }
+
+    .credit-card + .credit-card { margin-top: 16px; }
+
     .credit-card-image {
-      min-height: 140px;
+      min-height: 120px;
     }
 
     .credit-card-details {
-      padding: 20px;
+      padding: 16px;
     }
 
     .credit-card-details h3 {
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     .credit-card-details p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
 
+    .credit-card-meta { font-size: 0.75rem; margin-bottom: 8px; }
+    .credit-card-role { font-size: 0.68rem; }
+
     .award-badge {
-      font-size: 0.62rem;
-      padding: 3px 8px;
+      font-size: 0.6rem;
+      padding: 3px 7px;
     }
+
+    .cv-divider { margin: 32px 0; }
+    .cv-footer { margin-top: 40px; }
+  }
+
+  /* Tiny phones (320px) */
+  @media (max-width: 360px) {
+    .cv-page { padding: 28px 12px 24px; }
+    .credit-card-details { padding: 14px; }
+    .credit-card-details h3 { font-size: 0.9rem; }
+    .credit-card-details p { font-size: 0.78rem; }
   }
 </style>
 </head>
