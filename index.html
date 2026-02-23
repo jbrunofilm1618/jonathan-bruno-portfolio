@@ -1535,7 +1535,7 @@
   }
 
   .emdash-banner.open .emdash-banner-body {
-    max-height: 200px;
+    max-height: 500px;
     padding: 0 24px 14px;
   }
 
@@ -1887,6 +1887,12 @@
     nav { padding: 16px 24px; }
     nav .nav-links { gap: 20px; }
     nav .nav-links a { font-size: 0.72rem; }
+
+    /* Em-dash banner: ensure full text visible on mobile */
+    .emdash-banner-header { padding: 10px 16px; }
+    .emdash-banner-body { padding: 0 16px; }
+    .emdash-banner.open .emdash-banner-body { padding: 0 16px 14px; }
+    .emdash-banner-text { font-size: 0.78rem; line-height: 1.55; }
 
     .hero { padding: 140px 24px 80px; }
     .hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
@@ -2613,6 +2619,19 @@
     document.body.classList.add('banner-dismissed');
   }
 
+  function updateNavPosition() {
+    if (emdashBanner.classList.contains('dismissed')) {
+      nav.style.top = '';
+      return;
+    }
+    const bannerHeight = emdashBanner.offsetHeight;
+    nav.style.top = bannerHeight + 'px';
+  }
+
+  // Keep nav positioned below banner during open/close transition
+  const bannerBody = emdashBanner.querySelector('.emdash-banner-body');
+  bannerBody.addEventListener('transitionend', updateNavPosition);
+
   emdashHeader.addEventListener('click', (e) => {
     if (e.target === emdashClose) return;
     emdashBanner.classList.toggle('open');
@@ -2622,6 +2641,7 @@
     e.stopPropagation();
     emdashBanner.classList.add('dismissed');
     document.body.classList.add('banner-dismissed');
+    nav.style.top = '';
     sessionStorage.setItem('emdash-dismissed', 'true');
   });
 
