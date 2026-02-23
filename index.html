@@ -244,9 +244,20 @@
       display: block;
     }
 
+    /* When mobile menu is open, expand nav to full-screen overlay.
+       backdrop-filter on nav creates a containing block that breaks
+       position:fixed on children, so we remove it and go solid. */
+    body.mobile-menu-open nav {
+      top: 0;
+      bottom: 0;
+      background: var(--color-bg);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
     nav .nav-links {
       display: none;
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -1479,6 +1490,7 @@
     cursor: pointer;
     max-width: 900px;
     margin: 0 auto;
+    touch-action: manipulation;
   }
 
   .emdash-banner-title {
@@ -1501,12 +1513,13 @@
     font-size: 1.1rem;
     cursor: pointer;
     padding: 0;
-    width: 24px;
-    height: 24px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
+    touch-action: manipulation;
   }
 
   .emdash-banner.open .emdash-expand {
@@ -1519,8 +1532,9 @@
     color: rgba(247, 245, 242, 0.3);
     font-size: 0.75rem;
     cursor: pointer;
-    padding: 0;
+    padding: 8px;
     transition: color 0.2s ease;
+    touch-action: manipulation;
   }
 
   .emdash-close:hover {
@@ -1535,7 +1549,7 @@
   }
 
   .emdash-banner.open .emdash-banner-body {
-    max-height: 200px;
+    max-height: 500px;
     padding: 0 24px 14px;
   }
 
@@ -1565,6 +1579,7 @@
     font-size: 1.2rem;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     transition: transform 0.2s ease;
+    touch-action: manipulation;
   }
 
   .a11y-toggle:hover {
@@ -1888,6 +1903,12 @@
     nav .nav-links { gap: 20px; }
     nav .nav-links a { font-size: 0.72rem; }
 
+    /* Em-dash banner: ensure full text visible on mobile */
+    .emdash-banner-header { padding: 10px 16px; }
+    .emdash-banner-body { padding: 0 16px; }
+    .emdash-banner.open .emdash-banner-body { padding: 0 16px 14px; }
+    .emdash-banner-text { font-size: 0.78rem; line-height: 1.55; }
+
     .hero { padding: 140px 24px 80px; }
     .hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-sub { font-size: 1rem; }
@@ -2066,7 +2087,7 @@
 
     <p class="section-opener">I grew up in Colorado. The landscape teaches you to pay attention before it teaches you anything else. Morning light breaking across the Front Range, the stillness of a trailhead before dawn, the way a thunderstorm announces itself with a thick smell on the wind twenty minutes before it appears. That landscape trained my eye long before I picked up a camera. It built an instinct for observation, for patience, for reading what's actually in front of you before deciding what to do with it.</p>
 
-    <p>So I moved to Los Angeles. The pace changed. Everything got louder, faster, more competitive. But I carried that Colorado stillness with me. It showed up in how I composed a frame, how I read a room, how I found the story inside the noise. After earning my BFA in Cinematography from Chapman University — where I was awarded both the Eastman Kodak and Panavision grants — I spent the next decade behind the camera. I shot indie features and national commercials for brands like L'Oreal Paris, Warner Bros, and Sony Pictures. I operated A-camera on <em>Bone Tomahawk</em> alongside my childhood hero, Kurt Russell, shot the title sequence and operated camera on Justin Marks and Morten Tyldum's espionage thriller <em>Counterpart</em> for Starz, and worked second unit on Netflix's <em>Love</em>. My curiosity kept pulling me into unfamiliar rooms — performance capture stages for <em>God of War</em> and <em>Uncharted 4</em>, Alejandro González Iñárritu's VR installation <em>Carne Y Arena</em>, experimental projects at Uber. I wasn't chasing a title. I was chasing the work.</p>
+    <p>Then I moved to Los Angeles. The pace changed. Everything got louder, faster, more competitive. But I carried that Colorado stillness with me. It showed up in how I composed a frame, how I read a room, how I found the story inside the noise. After earning my BFA in Cinematography from Chapman University — where I was awarded both the Eastman Kodak and Panavision grants — I spent the next decade behind the camera. I shot indie features and national commercials for brands like L'Oreal Paris, Warner Bros, and Sony Pictures. I operated A-camera on <em>Bone Tomahawk</em> alongside my childhood hero, Kurt Russell, shot the title sequence and operated camera on Justin Marks and Morten Tyldum's espionage thriller <em>Counterpart</em> for Starz, and worked second unit on Netflix's <em>Love</em>. My curiosity kept pulling me into unfamiliar rooms — performance capture stages for <em>God of War</em> and <em>Uncharted 4</em>, Alejandro González Iñárritu's VR installation <em>Carne Y Arena</em>, experimental projects at Uber. I wasn't chasing a title. I was chasing the work.</p>
 
     <p>What I didn't realize at the time was that every new room was teaching me something beyond the camera. I was learning how to walk into a world I didn't fully understand, earn trust quickly, and deliver. That instinct — show up, learn the language, solve the problem — is what eventually carried me from set to strategy.</p>
 
@@ -2613,6 +2634,19 @@
     document.body.classList.add('banner-dismissed');
   }
 
+  function updateNavPosition() {
+    if (emdashBanner.classList.contains('dismissed')) {
+      nav.style.top = '';
+      return;
+    }
+    const bannerHeight = emdashBanner.offsetHeight;
+    nav.style.top = bannerHeight + 'px';
+  }
+
+  // Keep nav positioned below banner during open/close transition
+  const bannerBody = emdashBanner.querySelector('.emdash-banner-body');
+  bannerBody.addEventListener('transitionend', updateNavPosition);
+
   emdashHeader.addEventListener('click', (e) => {
     if (e.target === emdashClose) return;
     emdashBanner.classList.toggle('open');
@@ -2622,6 +2656,7 @@
     e.stopPropagation();
     emdashBanner.classList.add('dismissed');
     document.body.classList.add('banner-dismissed');
+    nav.style.top = '';
     sessionStorage.setItem('emdash-dismissed', 'true');
   });
 
@@ -2632,13 +2667,14 @@
   const largeText = document.getElementById('largeText');
   const reduceMotion = document.getElementById('reduceMotion');
 
-  a11yToggle.addEventListener('click', () => {
+  a11yToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
     a11yPanel.classList.toggle('open');
   });
 
   // Close panel when clicking outside
   document.addEventListener('click', (e) => {
-    if (!a11yPanel.contains(e.target) && e.target !== a11yToggle) {
+    if (!a11yPanel.contains(e.target) && !a11yToggle.contains(e.target)) {
       a11yPanel.classList.remove('open');
     }
   });
