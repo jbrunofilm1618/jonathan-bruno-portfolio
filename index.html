@@ -72,7 +72,7 @@
   /* ============ NAV ============ */
   nav {
     position: fixed;
-    top: 42px;
+    top: 0;
     left: 0;
     right: 0;
     z-index: 100;
@@ -2521,20 +2521,26 @@
 </div>
 
 <script>
-  // Touch-safe tap handler: uses touchend on mobile (with preventDefault to
-  // block the synthetic click) and falls back to click for desktop / assistive tech.
+  // Touch-safe tap handler: on mobile, touchend fires and sets a flag to
+  // suppress the subsequent synthetic click. On desktop, only click fires.
   function onTap(element, handler) {
     let touchMoved = false;
+    let handledByTouch = false;
     element.addEventListener('touchstart', () => { touchMoved = false; }, { passive: true });
     element.addEventListener('touchmove', () => { touchMoved = true; }, { passive: true });
     element.addEventListener('touchend', (e) => {
       if (!touchMoved) {
         e.preventDefault();
+        handledByTouch = true;
         handler(e);
+        // Reset flag after the synthetic click would have fired
+        setTimeout(() => { handledByTouch = false; }, 400);
       }
     });
     element.addEventListener('click', (e) => {
-      handler(e);
+      if (!handledByTouch) {
+        handler(e);
+      }
     });
   }
 
@@ -2731,7 +2737,7 @@
 
   function updateNavPosition() {
     if (emdashBanner.classList.contains('dismissed')) {
-      nav.style.top = '';
+      nav.style.top = '0';
       return;
     }
     const bannerHeight = emdashBanner.offsetHeight;
@@ -2742,11 +2748,22 @@
   const bannerBody = emdashBanner.querySelector('.emdash-banner-body');
   bannerBody.addEventListener('transitionend', updateNavPosition);
 
+  // Poll briefly during transition so nav tracks the banner smoothly
+  let navTrackingTimer = null;
+  function trackNavDuringTransition() {
+    clearInterval(navTrackingTimer);
+    let ticks = 0;
+    navTrackingTimer = setInterval(() => {
+      updateNavPosition();
+      if (++ticks >= 20) clearInterval(navTrackingTimer);
+    }, 30);
+  }
+
   // Toggle banner open/closed
   function toggleBanner(e) {
     e.stopPropagation();
     emdashBanner.classList.toggle('open');
-    setTimeout(updateNavPosition, 450);
+    trackNavDuringTransition();
   }
 
   // Dismiss banner
@@ -2754,18 +2771,23 @@
     e.stopPropagation();
     emdashBanner.classList.add('dismissed');
     document.body.classList.add('banner-dismissed');
-    nav.style.top = '';
+    nav.style.top = '0';
     sessionStorage.setItem('emdash-dismissed', 'true');
   }
 
-  // Touch-safe handlers for mobile reliability
-  onTap(emdashExpand, toggleBanner);
-  onTap(emdashBanner.querySelector('.emdash-banner-title'), toggleBanner);
-  onTap(emdashClose, dismissBanner);
-
-  // Allow tapping anywhere on the header to expand (except close button)
+  // Single header-level tap handler: tapping anywhere on the header row
+  // toggles the banner, except the close button which dismisses it.
+  // Only one handler on the header to avoid double-toggle from nested elements.
   onTap(emdashHeader, (e) => {
-    if (!emdashClose.contains(e.target)) {
+    // For touch events, resolve the actual element under the finger
+    var target = e.target;
+    if (e.changedTouches && e.changedTouches.length) {
+      var touch = e.changedTouches[0];
+      target = document.elementFromPoint(touch.clientX, touch.clientY) || target;
+    }
+    if (emdashClose.contains(target) || target === emdashClose) {
+      dismissBanner(e);
+    } else {
       toggleBanner(e);
     }
   });
