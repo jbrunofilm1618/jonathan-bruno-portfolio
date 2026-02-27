@@ -1554,6 +1554,13 @@
     color: var(--color-text-on-dark);
   }
 
+  .emdash-expand,
+  .emdash-close,
+  .emdash-banner-header,
+  .a11y-toggle {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .emdash-banner-body {
     max-height: 0;
     overflow: hidden;
@@ -2351,7 +2358,7 @@
     <div class="section-label">Cinematography & Filmmaking</div>
     <div class="section-title">The Foundation</div>
 
-    <p class="intro">Before I led creative teams, I spent a decade behind the camera — on feature films, AAA game cinematics, VR experiences, and national commercials. This is where I learned to see, and it's the foundation everything else is built on.</p>
+    <p class="intro">Before I led creative teams, I spent a decade behind the camera — on feature films, AAA game cinematics, VR experiences, and national commercials. This is the era in which I honed my creative eye, enhanced my phenomenological filter of experience and codified my personal approach to media creation; and it's the foundation everything that came after is built on.</p>
 
     <div class="credits-and-buttons">
       <div class="credit-item">
@@ -2514,6 +2521,23 @@
 </div>
 
 <script>
+  // Touch-safe tap handler: uses touchend on mobile (with preventDefault to
+  // block the synthetic click) and falls back to click for desktop / assistive tech.
+  function onTap(element, handler) {
+    let touchMoved = false;
+    element.addEventListener('touchstart', () => { touchMoved = false; }, { passive: true });
+    element.addEventListener('touchmove', () => { touchMoved = true; }, { passive: true });
+    element.addEventListener('touchend', (e) => {
+      if (!touchMoved) {
+        e.preventDefault();
+        handler(e);
+      }
+    });
+    element.addEventListener('click', (e) => {
+      handler(e);
+    });
+  }
+
   // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
@@ -2718,28 +2742,36 @@
   const bannerBody = emdashBanner.querySelector('.emdash-banner-body');
   bannerBody.addEventListener('transitionend', updateNavPosition);
 
-  // Toggle banner open/closed — direct handler on expand button
+  // Toggle banner open/closed
   function toggleBanner(e) {
     e.stopPropagation();
-    e.preventDefault();
     emdashBanner.classList.toggle('open');
     setTimeout(updateNavPosition, 450);
   }
-  emdashExpand.addEventListener('click', toggleBanner);
 
-  // Also allow tapping the title text to toggle
-  emdashBanner.querySelector('.emdash-banner-title').addEventListener('click', toggleBanner);
-
-  // Dismiss banner — direct handler on close button
+  // Dismiss banner
   function dismissBanner(e) {
     e.stopPropagation();
-    e.preventDefault();
     emdashBanner.classList.add('dismissed');
     document.body.classList.add('banner-dismissed');
     nav.style.top = '';
     sessionStorage.setItem('emdash-dismissed', 'true');
   }
-  emdashClose.addEventListener('click', dismissBanner);
+
+  // Touch-safe handlers for mobile reliability
+  onTap(emdashExpand, toggleBanner);
+  onTap(emdashBanner.querySelector('.emdash-banner-title'), toggleBanner);
+  onTap(emdashClose, dismissBanner);
+
+  // Allow tapping anywhere on the header to expand (except close button)
+  onTap(emdashHeader, (e) => {
+    if (!emdashClose.contains(e.target)) {
+      toggleBanner(e);
+    }
+  });
+
+  // Set correct nav position on initial load
+  updateNavPosition();
 
   // Accessibility panel
   const a11yToggle = document.getElementById('a11yToggle');
@@ -2748,21 +2780,14 @@
   const largeText = document.getElementById('largeText');
   const reduceMotion = document.getElementById('reduceMotion');
 
-  // Track when the toggle was just tapped to prevent race conditions on mobile
-  let a11yJustToggled = false;
-
-  a11yToggle.addEventListener('click', (e) => {
+  // Touch-safe toggle for mobile reliability
+  onTap(a11yToggle, (e) => {
     e.stopPropagation();
-    e.preventDefault();
-    a11yJustToggled = true;
     a11yPanel.classList.toggle('open');
-    // Reset flag after current event cycle completes
-    setTimeout(() => { a11yJustToggled = false; }, 0);
   });
 
-  // Close panel when clicking outside — skip if toggle was just tapped
+  // Close panel when interacting outside
   document.addEventListener('click', (e) => {
-    if (a11yJustToggled) return;
     if (!a11yPanel.contains(e.target) && !a11yToggle.contains(e.target)) {
       a11yPanel.classList.remove('open');
     }
