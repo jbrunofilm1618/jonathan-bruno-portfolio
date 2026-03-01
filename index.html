@@ -12,8 +12,8 @@
 <script>document.documentElement.classList.remove('no-js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light only">
-<meta name="supported-color-schemes" content="light only">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
 <title>Jonathan Bruno — Creative Director & Video Production Leader</title>
 <meta property="og:title" content="Jonathan Bruno — Creative Director & Video Production Leader">
 <meta property="og:description" content="From Hollywood sets to Apple boardrooms — 17 years building stories that move people and strategies that move business.">
@@ -28,7 +28,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    color-scheme: light only;
+    color-scheme: light dark;
     --color-bg: #F7F5F2;
     --color-bg-warm: #EFEAE4;
     --color-bg-dark: #1A1A1A;
@@ -1888,6 +1888,88 @@
       --color-border: #999999;
     }
   }
+
+  /* ============ DARK MODE ============ */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1C1C1E;
+      --color-bg-warm: #2C2C2E;
+      --color-bg-dark: #000000;
+      --color-text: #F5F5F7;
+      --color-text-secondary: #D1D1D6;
+      --color-text-light: #98989D;
+      --color-text-on-dark: #F5F5F7;
+      --color-accent: #D4A843;
+      --color-accent-muted: #E8C563;
+      --color-accent-decorative: #D4A843;
+      --color-border: #3A3A3C;
+      --color-card: #2C2C2E;
+    }
+
+    nav {
+      background: rgba(28, 28, 30, 0.75);
+    }
+
+    nav::after {
+      background: linear-gradient(to bottom, rgba(28, 28, 30, 0.6), rgba(28, 28, 30, 0));
+    }
+
+    body.mobile-menu-open nav,
+    nav .nav-links {
+      background: var(--color-bg);
+    }
+
+    .apple-section {
+      background: #000000;
+    }
+
+    .apple-stat .label {
+      color: rgba(245, 245, 247, 0.6);
+    }
+
+    .apple-section p {
+      color: rgba(245, 245, 247, 0.7);
+    }
+
+    .btn-light {
+      border-color: rgba(245, 245, 247, 0.3);
+    }
+
+    .emdash-close {
+      color: rgba(245, 245, 247, 0.3);
+    }
+
+    .emdash-banner-text {
+      color: rgba(245, 245, 247, 0.75);
+    }
+
+    .award-badge {
+      background: rgba(212, 168, 67, 0.12);
+      border-color: rgba(212, 168, 67, 0.25);
+    }
+
+    .work-card:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .credit-card:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-resume-dropdown,
+    .nav-resume-dropdown-mobile {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .a11y-panel {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .a11y-toggle {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+  }
+
   @keyframes fadeUp {
     to { opacity: 1; transform: translateY(0); }
   }
