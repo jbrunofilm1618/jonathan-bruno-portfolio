@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    color-scheme: light only;
+    color-scheme: light dark;
     --color-bg: #F7F5F2;
     --color-bg-warm: #EFEAE4;
     --color-bg-dark: #1A1A1A;
@@ -327,6 +327,33 @@
     .credit-card-details { padding: 14px; }
     .credit-card-details h3 { font-size: 0.9rem; }
     .credit-card-details p { font-size: 0.78rem; }
+  }
+
+  /* ============ DARK MODE ============ */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1C1C1E;
+      --color-bg-warm: #2C2C2E;
+      --color-bg-dark: #000000;
+      --color-text: #F5F5F7;
+      --color-text-secondary: #D1D1D6;
+      --color-text-light: #98989D;
+      --color-text-on-dark: #F5F5F7;
+      --color-accent: #D4A843;
+      --color-accent-muted: #E8C563;
+      --color-accent-decorative: #D4A843;
+      --color-border: #3A3A3C;
+      --color-card: #2C2C2E;
+    }
+
+    .credit-card:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .award-badge {
+      background: rgba(212, 168, 67, 0.12);
+      border-color: rgba(212, 168, 67, 0.25);
+    }
   }
 </style>
 </head>
