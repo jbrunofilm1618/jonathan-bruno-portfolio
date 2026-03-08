@@ -1,0 +1,145 @@
+<!--
+  Vimeo Video Player — Portable HTML Tiles
+  Extract from Intrepid Media, ready for reuse.
+
+  SETUP:
+  1. Add these fonts to your <head>:
+     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  2. Link the CSS:
+     <link rel="stylesheet" href="vimeo-player.css">
+  3. Paste this HTML where you want the tiles
+  4. Include the JS before </body>:
+     <script src="vimeo-player.js"></script>
+
+  CUSTOMIZING:
+  - To add/remove projects: add/remove a tile block below AND update workData in vimeo-player.js
+  - To change colors: override the --vp-* CSS custom properties in your own stylesheet
+  - To change the grid: wrap these tiles in your own grid container (CSS Grid or Flexbox)
+
+  TILE TYPES:
+  - Standard tile:     Has subprojects with videos → includes .work-card-expanded section
+  - Request-access:    Password-protected work → includes email link, no expandable section
+  - Coming-soon:       Work not yet available → badge only, no expandable section
+-->
+
+<!-- =============================================
+     STANDARD TILES (expandable, with video player)
+     ============================================= -->
+
+<!-- Booksy -->
+<div class="work-card" data-project="booksy">
+  <div class="work-card-header">
+    <div class="project-type">Branded Documentary</div>
+    <div class="client-name">Booksy — "Self-Made" Series</div>
+    <p>Three branded documentary spots produced in partnership with Unknown Certainty, highlighting stylists and barbers who built their businesses from the ground up — and now run them entirely on Booksy.</p>
+    <div class="sub-project-names">Nas · Yashira · Taylor</div>
+    <button class="work-toggle" aria-expanded="false">VIEW WORK <span class="toggle-arrow">&#9654;</span></button>
+  </div>
+  <div class="work-card-expanded" aria-hidden="true">
+    <hr class="work-divider">
+    <div class="work-tabs" role="tablist"></div>
+    <h4 class="work-subproject-title"></h4>
+    <div class="work-video-container"></div>
+  </div>
+</div>
+
+<!-- Yoshi -->
+<div class="work-card" data-project="yoshi">
+  <div class="work-card-header">
+    <div class="project-type">Launch Campaign</div>
+    <div class="client-name">Yoshi — Launch Campaign</div>
+    <p>Launch video campaign and advertisements for the U.S. Nationwide mobility company providing on-the-spot vehicle fueling & cleaning, fleet support, and mobile EV charging.</p>
+    <div class="sub-project-names">Investor Launch · Growth · Fleet</div>
+    <button class="work-toggle" aria-expanded="false">VIEW WORK <span class="toggle-arrow">&#9654;</span></button>
+  </div>
+  <div class="work-card-expanded" aria-hidden="true">
+    <hr class="work-divider">
+    <div class="work-tabs" role="tablist"></div>
+    <h4 class="work-subproject-title"></h4>
+    <div class="work-video-container"></div>
+  </div>
+</div>
+
+<!-- Taco Bell -->
+<div class="work-card" data-project="tacobell">
+  <div class="work-card-header">
+    <div class="project-type">Broadcast Spots</div>
+    <div class="client-name">Taco Bell — Broadcast Spots</div>
+    <p>Initially brought on as a production consultant for a brand partnership with NFL player Davante Adams. The success of the collaboration expanded into a creative consulting role across a run of nationally televised spots.</p>
+    <div class="sub-project-names">Devante Adams: Moving Day · Perfect Bite Nachos · Trio Cravings · Burrito Cravings · Stackers Maker Booth · Lowrider: Street Chalupa</div>
+    <button class="work-toggle" aria-expanded="false">VIEW WORK <span class="toggle-arrow">&#9654;</span></button>
+  </div>
+  <div class="work-card-expanded" aria-hidden="true">
+    <hr class="work-divider">
+    <div class="work-tabs" role="tablist"></div>
+    <h4 class="work-subproject-title"></h4>
+    <div class="work-video-container"></div>
+  </div>
+</div>
+
+<!-- Familia Grove — NEW PROJECT
+     Currently set up as expandable tile (ready for videos).
+     Update vimeo-player.js workData.familiagrove.subprojects with video IDs when ready.
+     Until then, it will show as a standard tile but the toggle won't appear
+     (because subprojects array is empty in JS). To show it as "coming soon"
+     instead, replace this block with the coming-soon version commented below. -->
+<div class="work-card" data-project="familiagrove">
+  <div class="work-card-header">
+    <div class="project-type">Brand Film</div>
+    <div class="client-name">Familia Grove — Brand Film</div>
+    <p>Premium olive oil brand film capturing the heritage, craft, and family story behind a multi-generational grove in the heart of California.</p>
+    <div class="sub-project-names">Brand Film</div>
+    <button class="work-toggle" aria-expanded="false">VIEW WORK <span class="toggle-arrow">&#9654;</span></button>
+  </div>
+  <div class="work-card-expanded" aria-hidden="true">
+    <hr class="work-divider">
+    <div class="work-tabs" role="tablist"></div>
+    <h4 class="work-subproject-title"></h4>
+    <div class="work-video-container"></div>
+  </div>
+</div>
+
+<!-- Familia Grove — COMING SOON version (use this instead of the above if videos aren't ready)
+<div class="work-card" data-project="familiagrove">
+  <div class="work-card-header">
+    <div class="project-type">Brand Film</div>
+    <div class="client-name">Familia Grove — Brand Film</div>
+    <p>Premium olive oil brand film capturing the heritage, craft, and family story behind a multi-generational grove in the heart of California.</p>
+    <div class="work-protected-badge">Videos Coming Soon</div>
+  </div>
+</div>
+-->
+
+
+<!-- =============================================
+     REQUEST ACCESS TILE (password-protected work)
+     ============================================= -->
+
+<!-- Pura -->
+<div class="work-card" data-project="pura">
+  <div class="work-card-header">
+    <div class="project-type">Brand Vision Film</div>
+    <div class="client-name">Pura — Brand Vision Film</div>
+    <p>Internal future-thinking brand vision film for the tech-forward fragrance company. Produced proofs of concept for future product lines and applications.</p>
+    <div class="work-protected-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Password Protected
+    </div>
+    <a class="work-request-btn" href="mailto:hello@intrepidmedia.co?subject=Request%20Access%3A%20Pura%20Brand%20Vision%20Film&body=Hi%2C%20I%E2%80%99d%20like%20to%20request%20access%20to%20the%20Pura%20brand%20vision%20film.%0A%0AName%3A%20%0ACompany%3A%20">REQUEST ACCESS</a>
+  </div>
+</div>
+
+
+<!-- =============================================
+     COMING SOON TILE
+     ============================================= -->
+
+<!-- Apple -->
+<div class="work-card" data-project="apple">
+  <div class="work-card-header">
+    <div class="project-type">Enterprise Creative</div>
+    <div class="client-name">Apple — Enterprise Creative</div>
+    <p>8 years of video production and creative direction for Apple's global sales organization — building content that energized enterprise teams and informed product strategy.</p>
+    <div class="work-protected-badge">Content Coming Soon</div>
+  </div>
+</div>
