@@ -1398,10 +1398,16 @@
     background: var(--color-accent-decorative);
   }
 
+  .pura-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
   .pura-request-btn {
     display: inline-block;
-    margin-top: 16px;
-    padding: 10px 22px;
+    padding: 6px 18px;
     font-family: var(--font-body);
     font-size: 0.82rem;
     font-weight: 500;
@@ -2459,7 +2465,10 @@
         <h3>Pura — Brand Vision Film</h3>
         <p>Internal future-thinking brand vision film for the tech-forward fragrance company. Produced proofs of concept for future product lines and applications.</p>
         <div class="card-tags">Password Protected</div>
-        <button class="card-toggle" onclick="togglePuraGate()">View Work <span class="toggle-arrow" id="pura-arrow">▶</span></button>
+        <div class="pura-actions">
+          <button class="card-toggle" onclick="togglePuraGate()">View Work <span class="toggle-arrow" id="pura-arrow">▶</span></button>
+          <a class="pura-request-btn" href="mailto:jbrunofilm@icloud.com?subject=Request%20Access%3A%20Pura%20Brand%20Vision%20Film&body=Hi%20Jonathan%2C%0A%0AI%E2%80%99d%20like%20to%20request%20the%20password%20to%20view%20the%20Pura%20Brand%20Vision%20Film.%0A%0AName%3A%20%0ACompany%3A%20%0A%0AThank%20you!">Request Access</a>
+        </div>
 
         <div class="card-expanded-content" id="pura-expanded">
           <!-- Password gate -->
@@ -2471,7 +2480,6 @@
                 <button onclick="checkPuraPassword()" class="pura-gate-btn">→</button>
               </div>
               <div id="pura-error" class="pura-gate-error"></div>
-              <a class="pura-request-btn" href="mailto:jbrunofilm@icloud.com?subject=Request%20Access%3A%20Pura%20Brand%20Vision%20Film&body=Hi%20Jonathan%2C%0A%0AI%E2%80%99d%20like%20to%20request%20the%20password%20to%20view%20the%20Pura%20Brand%20Vision%20Film.%0A%0AName%3A%20%0ACompany%3A%20%0A%0AThank%20you!">Request Access</a>
             </div>
           </div>
           <!-- Video (hidden until password entered) -->
