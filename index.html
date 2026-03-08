@@ -2372,13 +2372,13 @@
 
         <div class="card-expanded-content">
           <div class="card-video-nav" id="booksy-nav">
-            <button class="active" onclick="switchVideo('booksy', 'U5LewyzbQMY?si=gzPqzrOEpwr4AYKj', 'Barber Nas', this)">Barber Nas</button>
-            <button onclick="switchVideo('booksy', '361tIiixYWs?si=vm0jCyyn9KoT8M-p', 'Yashira Hiraldo', this)">Yashira Hiraldo</button>
-            <button onclick="switchVideo('booksy', 'LPl4WgqrLxU?si=ZXq5CGdg4DUzIsJD', 'Taylor Leven', this)">Taylor Leven</button>
+            <button class="active" onclick="switchVimeo('booksy', '1171159350', 'c49a08b92a', 'Barber Nas', this)">Barber Nas</button>
+            <button onclick="switchVimeo('booksy', '1171159415', '3cb940e2f4', 'Yashira Hiraldo', this)">Yashira Hiraldo</button>
+            <button onclick="switchVimeo('booksy', '1171159384', 'd3e009bda1', 'Taylor Leven', this)">Taylor Leven</button>
           </div>
           <div class="card-video-title" id="booksy-title">Barber Nas</div>
           <div class="card-video-player">
-            <iframe id="booksy-player" src="https://www.youtube.com/embed/U5LewyzbQMY?si=gzPqzrOEpwr4AYKj" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <iframe id="booksy-player" src="https://player.vimeo.com/video/1171159350?h=c49a08b92a&autoplay=0&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -2821,18 +2821,6 @@
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }
-  }
-
-  function switchVideo(project, videoId, title, btn) {
-    const player = document.getElementById(project + '-player');
-    const titleEl = document.getElementById(project + '-title');
-    const nav = document.getElementById(project + '-nav');
-
-    player.src = 'https://www.youtube.com/embed/' + videoId;
-    titleEl.textContent = title;
-
-    nav.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
   }
 
   function switchVimeo(project, vimeoId, h, title, btn) {
