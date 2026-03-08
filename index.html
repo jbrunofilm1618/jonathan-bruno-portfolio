@@ -2055,7 +2055,14 @@
     .work-card { padding: 24px 20px; }
     .work-card h3 { font-size: 1.15rem; }
     .work-card p { font-size: 0.95rem; }
-    .card-video-nav button { padding: 8px 12px; font-size: 0.78rem; }
+    .card-video-nav {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .card-video-nav::-webkit-scrollbar { display: none; }
+    .card-video-nav button { padding: 8px 12px; font-size: 0.78rem; flex-shrink: 0; white-space: nowrap; min-height: 44px; }
 
     /* Apple section */
     .apple-stats { flex-wrap: wrap; gap: 24px 32px; }
@@ -2135,7 +2142,7 @@
     .work-card h3 { font-size: 1.05rem; }
     .work-card p { font-size: 0.88rem; }
     .card-video-nav { gap: 6px; }
-    .card-video-nav button { padding: 6px 10px; font-size: 0.75rem; }
+    .card-video-nav button { padding: 6px 10px; font-size: 0.75rem; flex-shrink: 0; white-space: nowrap; min-height: 44px; }
 
     /* Apple section */
     .apple-stats { flex-direction: column; gap: 20px; }
@@ -2376,18 +2383,54 @@
         </div>
       </div>
 
-      <div class="work-card">
+      <div class="work-card expandable" id="yoshi-card">
         <div class="card-role">Creative Consultant</div>
         <h3>Yoshi Mobility — Launch Campaign</h3>
         <p>Launch video campaign for the Bay Area mobility company providing on-the-spot vehicle fueling, fleet support, and mobile EV charging.</p>
-        <div class="card-tags">Yoshi Growth · Yoshi Mobility</div>
+        <div class="card-tags">Investor Launch · Growth · Fleet</div>
+        <button class="card-toggle" onclick="toggleCard('yoshi-card')">View Work <span class="toggle-arrow">▶</span></button>
+
+        <div class="card-expanded-content">
+          <div class="card-video-nav" id="yoshi-nav">
+            <button class="active" onclick="switchVimeo('yoshi', '1171159293', '30bfc2dede', 'Investor Launch', this)">Investor Launch</button>
+            <button onclick="switchVimeo('yoshi', '1171159342', 'd68c4f22ff', 'Growth', this)">Growth</button>
+            <button onclick="switchVimeo('yoshi', '1171173666', 'bfc71605b6', 'Fleet', this)">Fleet</button>
+          </div>
+          <div class="card-video-title" id="yoshi-title">Investor Launch</div>
+          <div class="card-video-player">
+            <iframe id="yoshi-player" src="https://player.vimeo.com/video/1171159293?h=30bfc2dede&autoplay=0&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
       </div>
 
-      <div class="work-card">
+      <div class="work-card expandable" id="tacobell-card">
         <div class="card-role">Creative Consultant</div>
         <h3>Taco Bell — Broadcast Spots</h3>
         <p>Initially brought on as a lighting consultant for a brand partnership with NFL player Davante Adams. The success of the collaboration expanded into a creative consulting role across a run of nationally televised spots.</p>
-        <div class="card-tags">Davante Adams Partnership · Two Dollar Nachos · Trio Cravings · Stackers Maker Fair · Churro Chillers · Low Riders</div>
+        <div class="card-tags">Davante Adams · Perfect Bite Nachos · Trio Cravings · Burrito Cravings · Stackers Maker Booth · Lowrider</div>
+        <button class="card-toggle" onclick="toggleCard('tacobell-card')">View Work <span class="toggle-arrow">▶</span></button>
+
+        <div class="card-expanded-content">
+          <div class="card-video-nav" id="tacobell-nav">
+            <button class="active" onclick="switchVimeo('tacobell', '1171163774', '20e53930fc', 'Davante Adams: Moving Day', this)">Davante Adams</button>
+            <button onclick="switchVimeo('tacobell', '1171163754', '3daf07baed', 'Perfect Bite Nachos', this)">Nachos</button>
+            <button onclick="switchVimeo('tacobell', '1171163630', '20a921144c', 'Trio Cravings', this)">Trio</button>
+            <button onclick="switchVimeo('tacobell', '1171163685', '3729211c2a', 'Burrito Cravings', this)">Burrito</button>
+            <button onclick="switchVimeo('tacobell', '1171163737', '650d274426', 'Stackers Maker Booth', this)">Stackers</button>
+            <button onclick="switchVimeo('tacobell', '1171163714', '3de2c22018', 'Lowrider: Street Chalupa', this)">Lowrider</button>
+          </div>
+          <div class="card-video-title" id="tacobell-title">Davante Adams: Moving Day</div>
+          <div class="card-video-player">
+            <iframe id="tacobell-player" src="https://player.vimeo.com/video/1171163774?h=20e53930fc&autoplay=0&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="card-role">Producer / Director</div>
+        <h3>Familia Grove — Brand Film</h3>
+        <p>Premium olive oil brand film capturing the heritage, craft, and family story behind a multi-generational grove in the heart of California.</p>
+        <div class="card-tags">Brand Film · Coming Soon</div>
       </div>
 
       <div class="work-card expandable" id="pura-card">
@@ -2786,6 +2829,18 @@
     const nav = document.getElementById(project + '-nav');
 
     player.src = 'https://www.youtube.com/embed/' + videoId;
+    titleEl.textContent = title;
+
+    nav.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function switchVimeo(project, vimeoId, h, title, btn) {
+    const player = document.getElementById(project + '-player');
+    const titleEl = document.getElementById(project + '-title');
+    const nav = document.getElementById(project + '-nav');
+
+    player.src = 'https://player.vimeo.com/video/' + vimeoId + '?h=' + h + '&autoplay=0&title=0&byline=0&portrait=0';
     titleEl.textContent = title;
 
     nav.querySelectorAll('button').forEach(b => b.classList.remove('active'));
