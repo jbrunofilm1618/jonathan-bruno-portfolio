@@ -152,7 +152,6 @@
 
   .nav-resume-mobile {
     display: none;
-    position: relative;
   }
 
   .nav-resume-btn-mobile {
@@ -172,41 +171,6 @@
 
   .nav-resume-btn-mobile:hover {
     background: var(--color-accent-muted);
-  }
-
-  .nav-resume-dropdown-mobile {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    z-index: 200;
-    min-width: 90px;
-  }
-
-  .nav-resume-mobile.open .nav-resume-dropdown-mobile {
-    display: block;
-  }
-
-  .nav-resume-dropdown-mobile a {
-    display: block;
-    padding: 10px 14px;
-    font-size: 0.75rem;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: background 0.15s ease;
-  }
-
-  .nav-resume-dropdown-mobile a:hover {
-    background: var(--color-bg-warm);
-  }
-
-  .nav-resume-dropdown-mobile a + a {
-    border-top: 1px solid var(--color-border);
   }
 
   .nav-hamburger {
@@ -309,7 +273,7 @@
     }
   }
 
-  /* ============ NAV RESUME DROPDOWN ============ */
+  /* ============ NAV RESUME BUTTON ============ */
   .nav-resume-wrap {
     position: relative;
   }
@@ -333,41 +297,132 @@
     background: var(--color-accent-muted);
   }
 
-  .nav-resume-dropdown {
+  /* ============ RESUME INQUIRY MODAL ============ */
+  .resume-modal {
     display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .resume-modal.open {
+    display: flex;
+  }
+
+  .resume-modal-inner {
+    width: 100%;
+    max-width: 480px;
     background: var(--color-bg);
+    border-radius: 10px;
+    padding: 40px 36px 36px;
+    position: relative;
+  }
+
+  .resume-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s ease;
+    line-height: 1;
+  }
+
+  .resume-modal-close:hover {
+    color: var(--color-text);
+  }
+
+  .resume-modal-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  .resume-modal-subtitle {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .resume-form-group {
+    margin-bottom: 18px;
+  }
+
+  .resume-form-group label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .resume-form-group input,
+  .resume-form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: var(--color-bg-warm);
     border: 1px solid var(--color-border);
     border-radius: 6px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    z-index: 200;
-    min-width: 100px;
+    transition: border-color 0.2s ease;
+    outline: none;
   }
 
-  .nav-resume-wrap.open .nav-resume-dropdown {
-    display: block;
+  .resume-form-group input:focus,
+  .resume-form-group textarea:focus {
+    border-color: var(--color-accent);
   }
 
-  .nav-resume-dropdown a {
-    display: block;
-    padding: 10px 16px;
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: background 0.15s ease;
+  .resume-form-group textarea {
+    resize: vertical;
+    min-height: 70px;
   }
 
-  .nav-resume-dropdown a:hover {
-    background: var(--color-bg-warm);
+  .resume-form-row {
+    display: flex;
+    gap: 14px;
   }
 
-  .nav-resume-dropdown a + a {
-    border-top: 1px solid var(--color-border);
+  .resume-form-row .resume-form-group {
+    flex: 1;
+  }
+
+  .resume-form-submit {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .resume-form-submit:hover {
+    background: var(--color-accent-muted);
   }
 
   /* ============ HERO ============ */
@@ -1497,6 +1552,12 @@
     .reel-modal-close { top: -36px; font-size: 1.2rem; }
   }
 
+  @media (max-width: 768px) {
+    .resume-modal { padding: 20px; }
+    .resume-modal-inner { padding: 32px 24px 28px; }
+    .resume-form-row { flex-direction: column; gap: 0; }
+  }
+
   /* ============ FOOTER ============ */
   footer {
     padding: 32px 40px;
@@ -2258,11 +2319,7 @@
   <a href="#" class="nav-name">Jonathan Bruno</a>
   <div class="nav-mobile-actions">
     <div class="nav-resume-mobile" id="navResumeMobile">
-      <button class="nav-resume-btn-mobile" onclick="this.parentElement.classList.toggle('open')">Résumé ↓</button>
-      <div class="nav-resume-dropdown-mobile">
-        <a href="Jonathan_Bruno_Resume.pdf" download>PDF</a>
-        <a href="Jonathan_Bruno_Resume.docx" download>DOCX</a>
-      </div>
+      <button class="nav-resume-btn-mobile" onclick="openResumeModal()">Résumé</button>
     </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
     <span></span>
@@ -2277,11 +2334,7 @@
     <li><a href="#foundation">Foundation</a></li>
     <li><a href="#contact">Contact</a></li>
     <li class="nav-resume-wrap">
-      <button class="nav-resume-btn" onclick="this.parentElement.classList.toggle('open')">Résumé ↓</button>
-      <div class="nav-resume-dropdown">
-        <a href="Jonathan_Bruno_Resume.pdf" download>PDF</a>
-        <a href="Jonathan_Bruno_Resume.docx" download>DOCX</a>
-      </div>
+      <button class="nav-resume-btn" onclick="openResumeModal()">Résumé</button>
     </li>
   </ul>
 </nav>
@@ -2667,6 +2720,40 @@
   </div>
 </div>
 
+<!-- RESUME INQUIRY MODAL -->
+<div class="resume-modal" id="resumeModal">
+  <div class="resume-modal-inner">
+    <button class="resume-modal-close" onclick="closeResumeModal()" aria-label="Close form">✕</button>
+    <div class="resume-modal-title">Request Résumé</div>
+    <p class="resume-modal-subtitle">Please share a few details so I know where you're coming from.</p>
+    <form id="resumeForm" onsubmit="submitResumeInquiry(event)">
+      <div class="resume-form-group">
+        <label for="resumeName">Your Name</label>
+        <input type="text" id="resumeName" name="name" required autocomplete="name">
+      </div>
+      <div class="resume-form-group">
+        <label for="resumeEmail">Email</label>
+        <input type="email" id="resumeEmail" name="email" required autocomplete="email">
+      </div>
+      <div class="resume-form-row">
+        <div class="resume-form-group">
+          <label for="resumePosition">Your Position / Title</label>
+          <input type="text" id="resumePosition" name="position" required>
+        </div>
+        <div class="resume-form-group">
+          <label for="resumeCompany">Company</label>
+          <input type="text" id="resumeCompany" name="company" required>
+        </div>
+      </div>
+      <div class="resume-form-group">
+        <label for="resumeNote">Note <span style="text-transform:none;font-weight:400;color:var(--color-text-light)">(optional)</span></label>
+        <textarea id="resumeNote" name="note" rows="2" placeholder="Anything you'd like me to know"></textarea>
+      </div>
+      <button type="submit" class="resume-form-submit">Send Request</button>
+    </form>
+  </div>
+</div>
+
 <footer role="contentinfo">
   &copy; 2026 Jonathan Bruno. All rights reserved.
 </footer>
@@ -2884,17 +2971,51 @@
     });
   });
 
-  // Close resume dropdown on click outside
-  document.addEventListener('click', (e) => {
-    const wrap = document.querySelector('.nav-resume-wrap');
-    if (wrap && !wrap.contains(e.target)) {
-      wrap.classList.remove('open');
-    }
-    const mobileWrap = document.getElementById('navResumeMobile');
-    if (mobileWrap && !mobileWrap.contains(e.target)) {
-      mobileWrap.classList.remove('open');
+  // Resume inquiry modal
+  function openResumeModal() {
+    document.getElementById('resumeModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeResumeModal() {
+    document.getElementById('resumeModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('resumeModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeResumeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('resumeModal').classList.contains('open')) {
+      closeResumeModal();
     }
   });
+
+  function submitResumeInquiry(e) {
+    e.preventDefault();
+    const name = document.getElementById('resumeName').value.trim();
+    const email = document.getElementById('resumeEmail').value.trim();
+    const position = document.getElementById('resumePosition').value.trim();
+    const company = document.getElementById('resumeCompany').value.trim();
+    const note = document.getElementById('resumeNote').value.trim();
+
+    const subject = encodeURIComponent('Résumé Request — ' + name + ', ' + company);
+    let body = 'Name: ' + name + '\n'
+             + 'Email: ' + email + '\n'
+             + 'Position: ' + position + '\n'
+             + 'Company: ' + company;
+    if (note) body += '\n\nNote:\n' + note;
+    body = encodeURIComponent(body);
+
+    window.location.href = 'mailto:jbrunofilm@icloud.com?subject=' + subject + '&body=' + body;
+
+    // Reset and close after a brief delay
+    setTimeout(() => {
+      document.getElementById('resumeForm').reset();
+      closeResumeModal();
+    }, 500);
+  }
 
   // Em-dash banner
   const emdashBanner = document.getElementById('emdashBanner');
