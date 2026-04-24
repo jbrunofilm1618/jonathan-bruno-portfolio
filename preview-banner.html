@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banner Placement Mockups — Jonathan Bruno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #F7F5F2;
+    --color-bg-warm: #EFEAE4;
+    --color-bg-dark: #1A1A1A;
+    --color-text: #1A1A1A;
+    --color-text-secondary: #3D3A36;
+    --color-text-light: #6B665F;
+    --color-text-on-dark: #F7F5F2;
+    --color-accent: #8B6914;
+    --color-accent-muted: #D4A843;
+    --color-accent-decorative: #B8860B;
+    --color-border: #D6D0C8;
+    --color-card: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --max-width: 860px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ PAGE CHROME / LABELS ============ */
+  .mockup-toc {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: var(--color-bg-dark);
+    color: var(--color-text-on-dark);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    line-height: 1.9;
+    z-index: 500;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .mockup-toc strong {
+    display: block;
+    font-weight: 500;
+    color: var(--color-accent-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+    font-size: 0.68rem;
+  }
+  .mockup-toc a {
+    color: var(--color-text-on-dark);
+    text-decoration: none;
+    display: block;
+    opacity: 0.85;
+  }
+  .mockup-toc a:hover { opacity: 1; color: var(--color-accent-muted); }
+
+  .mockup-divider {
+    background: #2a2622;
+    color: #d4a843;
+    padding: 10px 24px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .mockup-divider small {
+    display: block;
+    color: rgba(247,245,242,0.55);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    margin-top: 2px;
+    font-size: 0.72rem;
+  }
+
+  .mockup-frame {
+    border-bottom: 6px solid #2a2622;
+  }
+
+  /* ============ SHARED NAV / HERO / SECTION STUBS ============ */
+  .fake-nav {
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(247, 245, 242, 0.85);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .fake-nav .nav-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+  .fake-nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .fake-hero {
+    padding: 100px 40px 80px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .fake-hero .hero-label {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 24px;
+  }
+  .fake-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+  .fake-hero .hero-sub {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    max-width: 580px;
+  }
+  .fake-hero .hero-line {
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    margin-top: 48px;
+  }
+
+  .fake-section {
+    padding: 80px 40px 60px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .fake-section .section-label {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+  .fake-section .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+  .fake-section p {
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+
+  /* ============ BANNER STYLES (the "Accent pill + headline" design) ============ */
+  /* Shared atoms */
+  .wip-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
+  .wip-pill::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    animation: wip-pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes wip-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.72); }
+  }
+  .wip-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.25;
+  }
+  .wip-sub {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 620px;
+  }
+  .wip-sub em { color: var(--color-text-secondary); font-style: italic; }
+
+  /* ---------- Option A: Top strip above nav ---------- */
+  .wip-strip {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 10px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .wip-strip .wip-pill { padding: 4px 10px; font-size: 0.62rem; }
+  .wip-strip .wip-strip-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+  .wip-strip .wip-strip-text em { color: var(--color-accent); font-style: normal; }
+
+  /* ---------- Option B: Hero sub-banner (inside hero, after sub) ---------- */
+  .wip-hero-banner {
+    margin-top: 40px;
+    padding: 20px 22px;
+    border-left: 3px solid var(--color-accent);
+    background: rgba(212, 168, 67, 0.08);
+    border-radius: 0 6px 6px 0;
+    max-width: 620px;
+  }
+  .wip-hero-banner .wip-pill { margin-bottom: 10px; }
+  .wip-hero-banner .wip-headline { font-size: 1.35rem; margin-bottom: 6px; }
+  .wip-hero-banner .wip-sub { font-size: 0.92rem; }
+
+  /* ---------- Option C: Above Recent Work (lead-in block) ---------- */
+  .wip-leadin {
+    max-width: var(--max-width);
+    margin: 0 auto 48px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .wip-leadin .wip-pill { margin-bottom: 18px; }
+  .wip-leadin .wip-headline {
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    margin-bottom: 12px;
+  }
+  .wip-leadin .wip-sub { margin: 0 auto; }
+  .wip-leadin-rule {
+    width: 40px;
+    height: 1px;
+    background: var(--color-accent);
+    margin: 24px auto 0;
+  }
+
+  /* ---------- Option D: Standalone section (between Hero and Through Line) ---------- */
+  .wip-section {
+    background: var(--color-bg-warm);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 72px 40px;
+  }
+  .wip-section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .wip-section .wip-pill { margin-top: 10px; }
+  .wip-section .wip-headline {
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    margin-bottom: 14px;
+  }
+  .wip-section .wip-section-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-top: 18px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .wip-section .wip-section-meta span::before {
+    content: '— ';
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 720px) {
+    .fake-nav ul { display: none; }
+    .wip-strip { padding: 10px 16px; gap: 10px; }
+    .wip-strip .wip-strip-text { font-size: 0.88rem; }
+    .wip-section-inner { grid-template-columns: 1fr; gap: 14px; }
+    .mockup-toc { top: auto; bottom: 12px; right: 12px; font-size: 0.68rem; padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="mockup-toc">
+  <strong>Placement options</strong>
+  <a href="#opt-a">A · Top strip above nav</a>
+  <a href="#opt-b">B · Hero sub-banner</a>
+  <a href="#opt-c">C · Above Recent Work</a>
+  <a href="#opt-d">D · Standalone section</a>
+</nav>
+
+<!-- ============================================================ -->
+<!-- OPTION A — TOP STRIP ABOVE NAV                               -->
+<!-- ============================================================ -->
+<div id="opt-a" class="mockup-frame">
+  <div class="mockup-divider">
+    Option A &middot; Top strip above nav
+    <small>Thin, site-wide, always visible &mdash; announces WIP to every visitor</small>
+  </div>
+
+  <!-- THE BANNER -->
+  <div class="wip-strip">
+    <span class="wip-pill">In Progress</span>
+    <span class="wip-strip-text">New chapters shooting now &mdash; <em>landing this season.</em></span>
+  </div>
+
+  <div class="fake-nav">
+    <span class="nav-name">Jonathan Bruno</span>
+    <ul><li>Story</li><li>Work</li><li>Apple</li><li>Foundation</li><li>Contact</li></ul>
+  </div>
+  <div class="fake-hero">
+    <div class="hero-label">Creative Director &amp; Video Production Leader</div>
+    <h1>Jonathan Bruno</h1>
+    <p class="hero-sub">From Hollywood sets to Apple boardrooms &mdash; 17 years building stories that move people and strategies that move business.</p>
+    <div class="hero-line"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- OPTION B — HERO SUB-BANNER                                   -->
+<!-- ============================================================ -->
+<div id="opt-b" class="mockup-frame">
+  <div class="mockup-divider">
+    Option B &middot; Hero sub-banner
+    <small>Tucked inside the hero &mdash; feels like part of the introduction</small>
+  </div>
+
+  <div class="fake-nav">
+    <span class="nav-name">Jonathan Bruno</span>
+    <ul><li>Story</li><li>Work</li><li>Apple</li><li>Foundation</li><li>Contact</li></ul>
+  </div>
+  <div class="fake-hero">
+    <div class="hero-label">Creative Director &amp; Video Production Leader</div>
+    <h1>Jonathan Bruno</h1>
+    <p class="hero-sub">From Hollywood sets to Apple boardrooms &mdash; 17 years building stories that move people and strategies that move business.</p>
+
+    <!-- THE BANNER -->
+    <div class="wip-hero-banner">
+      <span class="wip-pill">In Progress</span>
+      <div class="wip-headline">New chapters shooting now.</div>
+      <p class="wip-sub">Familia Grove, fresh Booksy pickups, and a couple of projects still under wraps &mdash; landing this season.</p>
+    </div>
+
+    <div class="hero-line"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- OPTION C — ABOVE RECENT WORK                                 -->
+<!-- ============================================================ -->
+<div id="opt-c" class="mockup-frame">
+  <div class="mockup-divider">
+    Option C &middot; Above Recent Work
+    <small>Centered lead-in block immediately before the project grid</small>
+  </div>
+
+  <div class="fake-nav">
+    <span class="nav-name">Jonathan Bruno</span>
+    <ul><li>Story</li><li>Work</li><li>Apple</li><li>Foundation</li><li>Contact</li></ul>
+  </div>
+
+  <div class="fake-section">
+    <div class="section-label">Selected Projects</div>
+    <div class="section-title">Recent Work</div>
+    <p>(&hellip; project grid would start here &hellip;)</p>
+  </div>
+
+  <div style="border-top: 1px solid var(--color-border); padding: 56px 0 56px; background: var(--color-bg);">
+
+    <!-- THE BANNER -->
+    <div class="wip-leadin">
+      <span class="wip-pill">In Progress</span>
+      <div class="wip-headline">New chapters shooting now &mdash; landing this season.</div>
+      <p class="wip-sub">Familia Grove, fresh Booksy pickups, and a couple of projects still under wraps. Check back soon &mdash; or <em>get in touch</em> for an early look.</p>
+      <div class="wip-leadin-rule"></div>
+    </div>
+
+    <div class="fake-section" style="padding-top: 0;">
+      <div class="section-label">Selected Projects</div>
+      <div class="section-title">Recent Work</div>
+      <p style="color: var(--color-text-light); font-style: italic;">(Project grid resumes here.)</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- OPTION D — STANDALONE SECTION                                -->
+<!-- ============================================================ -->
+<div id="opt-d" class="mockup-frame">
+  <div class="mockup-divider">
+    Option D &middot; Standalone section between Hero and Through Line
+    <small>Gets its own real estate &mdash; the largest, most editorial treatment</small>
+  </div>
+
+  <div class="fake-nav">
+    <span class="nav-name">Jonathan Bruno</span>
+    <ul><li>Story</li><li>Work</li><li>Apple</li><li>Foundation</li><li>Contact</li></ul>
+  </div>
+  <div class="fake-hero">
+    <div class="hero-label">Creative Director &amp; Video Production Leader</div>
+    <h1>Jonathan Bruno</h1>
+    <p class="hero-sub">From Hollywood sets to Apple boardrooms &mdash; 17 years building stories that move people and strategies that move business.</p>
+    <div class="hero-line"></div>
+  </div>
+
+  <!-- THE BANNER -->
+  <section class="wip-section">
+    <div class="wip-section-inner">
+      <span class="wip-pill">In Progress</span>
+      <div>
+        <div class="wip-headline">New chapters shooting now &mdash; landing this season.</div>
+        <p class="wip-sub">Familia Grove brand film, fresh Booksy pickups, and a couple of projects still under wraps. If you&rsquo;d like an early look, <em>get in touch</em>.</p>
+        <div class="wip-section-meta">
+          <span>Familia Grove</span>
+          <span>Booksy S2</span>
+          <span>Untitled Campaigns</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fake-section">
+    <div class="section-label">The Through Line</div>
+    <div class="section-title">I didn&rsquo;t plan to become a creative director.</div>
+    <p>(&hellip; story continues &hellip;)</p>
+  </div>
+</div>
+
+</body>
+</html>
