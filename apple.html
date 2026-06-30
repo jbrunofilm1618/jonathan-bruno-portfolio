@@ -206,9 +206,11 @@
    PASSWORD GATE  (client-side soft gate — not real security)
    ============================================================ */
 (function () {
-  var PASSWORD = 'Think Different';
+  var PASSWORD = 'thinkdifferent';
   var KEY = 'apple_unlocked';
   var body = document.body;
+  // Normalize: ignore spaces and capitalization so a stray space never locks anyone out.
+  function normalize(s) { return String(s).replace(/\s+/g, '').toLowerCase(); }
 
   if (sessionStorage.getItem(KEY) === '1') {
     body.classList.add('unlocked');
@@ -225,7 +227,7 @@
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (input.value.trim().toLowerCase() === PASSWORD.toLowerCase()) {
+    if (normalize(input.value) === PASSWORD) {
       sessionStorage.setItem(KEY, '1');
       body.classList.add('unlocked');
       return;
