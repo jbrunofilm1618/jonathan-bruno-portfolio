@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<!-- Hidden page: keep it out of search engines -->
+<meta name="robots" content="noindex, nofollow">
+<title>Jonathan Bruno — Apple Work</title>
+<script>document.documentElement.classList.remove('no-js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="video-player.css">
+
+<style>
+  :root {
+    --bg: #0A1220;
+    --bg-soft: #101a2c;
+    --text: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --blue: #60A5FA;
+    --gold: #E09F1F;
+    --border: rgba(241, 245, 249, 0.08);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-ui: 'Outfit', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ PASSWORD GATE ============ */
+  .gate {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    padding: 24px;
+    text-align: center;
+  }
+  body.unlocked .gate { display: none; }
+
+  .gate-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .gate-sub {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .gate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .gate-input {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    padding: 14px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    color: var(--text);
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .gate-input:focus { border-color: var(--blue); }
+  .gate-btn {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 18px;
+    border-radius: 6px;
+    border: none;
+    background: var(--gold);
+    color: #0A1220;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .gate-btn:hover { opacity: 0.88; }
+  .gate-error {
+    color: #f87171;
+    font-size: 0.82rem;
+    min-height: 1.2em;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .gate-error.show { opacity: 1; }
+
+  /* ============ PAGE ============ */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(56px, 9vw, 110px) clamp(20px, 5vw, 48px) 100px;
+  }
+  body:not(.unlocked) .page { display: none; }
+
+  .page-header { margin-bottom: 48px; }
+  .page-eyebrow {
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .page-intro {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 620px;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+
+  .empty-note {
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 40px 28px;
+    color: var(--text-secondary);
+    text-align: center;
+    font-size: 0.92rem;
+  }
+
+  .page-footer {
+    margin-top: 70px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 600px) {
+    .work-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div class="gate" id="gate">
+  <div class="gate-title">Jonathan Bruno</div>
+  <div class="gate-sub">Apple Work · Private</div>
+  <form class="gate-form" id="gateForm" autocomplete="off">
+    <input class="gate-input" id="gateInput" type="password" placeholder="Enter password" aria-label="Password" autofocus>
+    <button class="gate-btn" type="submit">Enter</button>
+    <div class="gate-error" id="gateError">Incorrect password</div>
+  </form>
+</div>
+
+<!-- ============ PAGE CONTENT ============ -->
+<main class="page">
+  <header class="page-header">
+    <div class="page-eyebrow">Selected Work</div>
+    <h1 class="page-title">Apple — Enterprise Creative</h1>
+    <p class="page-intro">Eight years of video production and creative direction for Apple's global sales organization — building content that energized enterprise teams and informed product strategy.</p>
+  </header>
+
+  <div class="work-grid" id="workGrid"></div>
+
+  <footer class="page-footer">
+    Private portfolio — please do not share without permission. · Jonathan Bruno
+  </footer>
+</main>
+
+<script>
+/* ============================================================
+   PASSWORD GATE  (client-side soft gate — not real security)
+   ============================================================ */
+(function () {
+  var PASSWORD = 'Think Different';
+  var KEY = 'apple_unlocked';
+  var body = document.body;
+
+  if (sessionStorage.getItem(KEY) === '1') {
+    body.classList.add('unlocked');
+  }
+
+  var form = document.getElementById('gateForm');
+  var input = document.getElementById('gateInput');
+  var error = document.getElementById('gateError');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (input.value.trim().toLowerCase() === PASSWORD.toLowerCase()) {
+      sessionStorage.setItem(KEY, '1');
+      body.classList.add('unlocked');
+    } else {
+      error.classList.add('show');
+      input.value = '';
+      input.focus();
+    }
+  });
+})();
+
+/* ============================================================
+   WORK CARDS
+   To add a project: add an object to APPLE_WORK below.
+   Each project can hold one or more videos (tabs).
+
+   Vimeo ID = the number in the URL  → vimeo.com/123456789
+   h        = the privacy hash for unlisted videos
+              vimeo.com/123456789/abc123def4  →  h: 'abc123def4'
+   ============================================================ */
+var APPLE_WORK = [
+  // -------- EXAMPLE — replace with real projects ----------
+  // {
+  //   type: 'Sales Enablement',
+  //   title: 'Project Name',
+  //   blurb: 'One or two sentences describing the piece.',
+  //   videos: [
+  //     { label: 'Main Film', vimeoId: '123456789', h: 'abc123def4' },
+  //     { label: 'Cutdown',   vimeoId: '987654321', h: '0fed321cba' }
+  //   ]
+  // },
+];
+
+(function () {
+  var grid = document.getElementById('workGrid');
+
+  if (!APPLE_WORK.length) {
+    grid.innerHTML = '<div class="empty-note">No projects added yet. ' +
+      'Add them to the <code>APPLE_WORK</code> array in this page.</div>';
+    return;
+  }
+
+  APPLE_WORK.forEach(function (proj, i) {
+    var card = document.createElement('div');
+    card.className = 'work-card';
+    card.dataset.index = i;
+
+    var subNames = proj.videos.map(function (v) { return v.label; }).join(' · ');
+
+    card.innerHTML =
+      '<div class="work-card-header">' +
+        '<div class="project-type">' + esc(proj.type || '') + '</div>' +
+        '<div class="client-name">' + esc(proj.title || '') + '</div>' +
+        '<p>' + esc(proj.blurb || '') + '</p>' +
+        (proj.videos.length > 1 ? '<div class="sub-project-names">' + esc(subNames) + '</div>' : '') +
+        '<button class="work-toggle" aria-expanded="false">VIEW WORK <span class="toggle-arrow">&#9654;</span></button>' +
+      '</div>' +
+      '<div class="work-card-expanded" aria-hidden="true">' +
+        '<hr class="work-divider">' +
+        '<div class="work-tabs" role="tablist"></div>' +
+        '<h4 class="work-subproject-title"></h4>' +
+        '<div class="work-video-container"></div>' +
+      '</div>';
+
+    grid.appendChild(card);
+
+    var tabsContainer = card.querySelector('.work-tabs');
+    proj.videos.forEach(function (v, vi) {
+      var btn = document.createElement('button');
+      btn.className = 'work-tab' + (vi === 0 ? ' active' : '');
+      btn.textContent = v.label;
+      btn.setAttribute('role', 'tab');
+      btn.addEventListener('click', function () { selectVideo(card, proj, vi); });
+      tabsContainer.appendChild(btn);
+    });
+
+    var toggle = card.querySelector('.work-toggle');
+    toggle.addEventListener('click', function () {
+      var isExpanded = card.classList.contains('expanded');
+      document.querySelectorAll('.work-card.expanded').forEach(function (other) {
+        if (other !== card) closeCard(other);
+      });
+      if (isExpanded) { closeCard(card); }
+      else { openCard(card, proj); }
+    });
+  });
+
+  function openCard(card, proj) {
+    card.classList.add('expanded');
+    card.querySelector('.work-toggle').setAttribute('aria-expanded', 'true');
+    card.querySelector('.work-card-expanded').setAttribute('aria-hidden', 'false');
+    selectVideo(card, proj, 0);
+    setTimeout(function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 350);
+  }
+
+  function closeCard(card) {
+    card.classList.remove('expanded');
+    var toggle = card.querySelector('.work-toggle');
+    var expanded = card.querySelector('.work-card-expanded');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    if (expanded) expanded.setAttribute('aria-hidden', 'true');
+    var vc = card.querySelector('.work-video-container');
+    if (vc) vc.innerHTML = '';
+  }
+
+  function selectVideo(card, proj, index) {
+    var v = proj.videos[index];
+    card.querySelectorAll('.work-tab').forEach(function (tab, i) {
+      tab.classList.toggle('active', i === index);
+    });
+    card.querySelector('.work-subproject-title').textContent = v.label;
+    var vc = card.querySelector('.work-video-container');
+    if (v.vimeoId) {
+      var embedUrl = 'https://player.vimeo.com/video/' + v.vimeoId +
+        '?autoplay=0&title=0&byline=0&portrait=0&badge=0&dnt=1' +
+        (v.h ? '&h=' + v.h : '');
+      vc.innerHTML = '<iframe src="' + embedUrl +
+        '" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"' +
+        ' allowfullscreen loading="lazy" title="' + esc(v.label) + '"></iframe>';
+    } else {
+      vc.innerHTML = '<div style="position:absolute;top:0;left:0;width:100%;height:100%;' +
+        'display:flex;align-items:center;justify-content:center;' +
+        'color:var(--text-secondary);font-size:0.9rem;">Video coming soon</div>';
+    }
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+})();
+</script>
+</body>
+</html>
