@@ -255,7 +255,6 @@ var APPLE_WORK = [
   {
     type: 'Creator Series',
     title: 'Creator Stories',
-    blurb: 'A series of short-form profiles spotlighting individual creators — the people and stories behind the work.',
     videos: [
       { label: 'Andres',  vimeoId: '1174985044', h: 'f78ed74998' },
       { label: 'Estelle', vimeoId: '1174985686' },
@@ -277,7 +276,6 @@ var APPLE_WORK = [
   {
     type: 'Network Film',
     title: 'Apple Consultants Network Reprise',
-    blurb: 'A reprise film for the Apple Consultants Network.',
     videos: [
       { label: 'Watch', vimeoId: '1205803797', h: 'e4daf430c5' }
     ]
@@ -304,7 +302,7 @@ var APPLE_WORK = [
       '<div class="work-card-header">' +
         '<div class="project-type">' + esc(proj.type || '') + '</div>' +
         '<div class="client-name">' + esc(proj.title || '') + '</div>' +
-        '<p>' + esc(proj.blurb || '') + '</p>' +
+        (proj.blurb ? '<p>' + esc(proj.blurb) + '</p>' : '') +
         (proj.videos.length > 1 ? '<div class="sub-project-names">' + esc(subNames) + '</div>' : '') +
         '<button class="work-toggle" aria-expanded="false">VIEW WORK <span class="toggle-arrow">&#9654;</span></button>' +
       '</div>' +
