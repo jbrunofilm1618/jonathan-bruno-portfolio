@@ -109,6 +109,10 @@
     transition: opacity 0.2s ease;
   }
   .gate-error.show { opacity: 1; }
+  .gate-error a {
+    color: var(--gold);
+    text-decoration: underline;
+  }
 
   /* ============ PAGE ============ */
   .page {
@@ -178,7 +182,7 @@
   <form class="gate-form" id="gateForm" autocomplete="off">
     <input class="gate-input" id="gateInput" type="password" placeholder="Enter password" aria-label="Password" autofocus>
     <button class="gate-btn" type="submit">Enter</button>
-    <div class="gate-error" id="gateError">Incorrect password</div>
+    <div class="gate-error" id="gateError"></div>
   </form>
 </div>
 
@@ -213,17 +217,28 @@
   var form = document.getElementById('gateForm');
   var input = document.getElementById('gateInput');
   var error = document.getElementById('gateError');
+  var attempts = 0;
+
+  var MAILTO = 'mailto:jbrunofilm@icloud.com' +
+    '?subject=' + encodeURIComponent('Apple Work — Access Help') +
+    '&body=' + encodeURIComponent("Hi Jonathan,\n\nI'm trying to view your Apple work page but the password isn't working. Could you help me get access?\n\nThanks,");
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (input.value.trim().toLowerCase() === PASSWORD.toLowerCase()) {
       sessionStorage.setItem(KEY, '1');
       body.classList.add('unlocked');
-    } else {
-      error.classList.add('show');
-      input.value = '';
-      input.focus();
+      return;
     }
+    attempts++;
+    if (attempts < 2) {
+      error.innerHTML = 'Incorrect password — please try again.';
+    } else {
+      error.innerHTML = 'Still no luck? <a href="' + MAILTO + '">Email Jonathan for assistance</a>.';
+    }
+    error.classList.add('show');
+    input.value = '';
+    input.focus();
   });
 })();
 
